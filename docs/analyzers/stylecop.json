@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+    "settings": {
+        "documentationRules": {
+            "companyName": "Kitpymes",
+            "copyrightText": "Copyright (c) Kitpymes. All rights reserved.\nLicensed under the MIT license. See LICENSE file in the project docs folder for full license information.",
+            "xmlHeader": true,
+            "headerDecoration": "-----------------------------------------------------------------------",
+            "documentInternalElements": false,
+            "documentationCulture": "es-MX",        
+            "variables": {
+                "licenseName": "MIT",
+                "licenseFile": "LICENSE"
+            }
+        },
+        "indentation": {
+            // El número de columnas a usar para cada sangr�a de c�digo. Dependiendo de las configuraciones useTabs y tabSize, esto se rellenar� con tabs y / o espacios.
+            "indentationSize": 4,
+            // El ancho de un car�cter de tabulaci�n duro en el c�digo fuente. Este valor se utiliza al convertir entre tabs y espacios.
+            "tabSize": 4,
+            // true: para usar tabs fijos, false: para usar sangr�a de espacios 
+            "useTabs": false
+        }   
+    }
+}
