@@ -1,74 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TestRun id="c1c9be77-16f3-4b80-a741-5c630e349245" name="sferrari@PC-SFERRARI 2023-12-19 13:39:44" runUser="PC-SFERRARI\sferrari" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <Times creation="2023-12-19T13:39:44.1621754+01:00" queuing="2023-12-19T13:39:44.1621754+01:00" start="2023-12-19T13:39:43.3301776+01:00" finish="2023-12-19T13:39:44.2081771+01:00" />
-  <TestSettings name="default" id="e57bb46c-0281-456f-8bfb-117e723c22ec">
-    <Deployment runDeploymentRoot="sferrari_PC-SFERRARI_2023-12-19_13_39_44" />
+<TestRun id="8787c48d-df64-4cc7-bcab-b4b2b69d4462" name="sferrari@PC-SFERRARI 2023-12-25 16:47:53" runUser="PC-SFERRARI\sferrari" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2023-12-25T16:47:53.6728048+01:00" queuing="2023-12-25T16:47:53.6728048+01:00" start="2023-12-25T16:47:52.9531930+01:00" finish="2023-12-25T16:47:53.7608023+01:00" />
+  <TestSettings name="default" id="156ad981-3501-4710-b3a6-07c80d12413d">
+    <Deployment runDeploymentRoot="sferrari_PC-SFERRARI_2023-12-25_16_47_53" />
   </TestSettings>
   <Results>
-    <UnitTestResult executionId="7dd22df9-891d-4695-8523-b2555d6c08bb" testId="fded6add-2af0-3504-d799-aa88e413a666" testName="BadRequest_WithMessages_List_Dictionary" computerName="PC-SFERRARI" duration="00:00:00.0016192" startTime="2023-12-19T13:39:44.0937321+01:00" endTime="2023-12-19T13:39:44.0954711+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7dd22df9-891d-4695-8523-b2555d6c08bb" />
-    <UnitTestResult executionId="0fd40674-6a63-495b-8607-02c2dd667d59" testId="166b6717-42c1-7d2d-f61b-5e9611d384f7" testName="BadRequest_WithMessages_List" computerName="PC-SFERRARI" duration="00:00:00.0016454" startTime="2023-12-19T13:39:44.0918072+01:00" endTime="2023-12-19T13:39:44.0936624+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0fd40674-6a63-495b-8607-02c2dd667d59" />
-    <UnitTestResult executionId="b8853616-3800-48d1-afec-c08b6f7037c3" testId="2331984f-ca8a-19fc-9ebe-4e0fffe204ef" testName="Ok_WithData" computerName="PC-SFERRARI" duration="00:00:00.0015710" startTime="2023-12-19T13:39:44.1096114+01:00" endTime="2023-12-19T13:39:44.1112931+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8853616-3800-48d1-afec-c08b6f7037c3" />
-    <UnitTestResult executionId="0d630bb4-6598-48aa-9ab8-8a9f948eb49c" testId="dd719bb8-7ad3-aa89-4bab-9742c35164dc" testName="BadRequest_WithMessage" computerName="PC-SFERRARI" duration="00:00:00.0095079" startTime="2023-12-19T13:39:43.9417040+01:00" endTime="2023-12-19T13:39:43.9839815+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0d630bb4-6598-48aa-9ab8-8a9f948eb49c" />
-    <UnitTestResult executionId="a5a84337-5940-46a1-b2f9-50cd8bb06ec6" testId="1d4a0240-1306-3053-dfec-0c74a1911abe" testName="Ok_WithTitle" computerName="PC-SFERRARI" duration="00:00:00.0003354" startTime="2023-12-19T13:39:44.1113551+01:00" endTime="2023-12-19T13:39:44.1117982+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a5a84337-5940-46a1-b2f9-50cd8bb06ec6" />
-    <UnitTestResult executionId="f4f1440c-3f76-4a8d-9e1e-95001c45aa97" testId="3fd8227f-dbd1-c600-45f2-d4ef7d2b0caf" testName="OK" computerName="PC-SFERRARI" duration="00:00:00.0010349" startTime="2023-12-19T13:39:44.1082739+01:00" endTime="2023-12-19T13:39:44.1095613+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4f1440c-3f76-4a8d-9e1e-95001c45aa97" />
-    <UnitTestResult executionId="236ed93a-16aa-47e4-837a-c1b8714dec97" testId="4447ae6c-7905-4ed1-25cf-48d401551b77" testName="Ok_WithTitle_WithData" computerName="PC-SFERRARI" duration="00:00:00.0016619" startTime="2023-12-19T13:39:44.1537194+01:00" endTime="2023-12-19T13:39:44.1570957+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="236ed93a-16aa-47e4-837a-c1b8714dec97" />
-    <UnitTestResult executionId="c23cde00-8ec7-4dc1-a7d4-29d2c756c90b" testId="b1367cb5-0a15-8578-0025-e9b6e640042d" testName="BadRequest_WithMessages_List_Tuple" computerName="PC-SFERRARI" duration="00:00:00.0019304" startTime="2023-12-19T13:39:44.0955552+01:00" endTime="2023-12-19T13:39:44.0977704+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c23cde00-8ec7-4dc1-a7d4-29d2c756c90b" />
-    <UnitTestResult executionId="9e1c73e8-d9c1-46c1-8ad8-55980e63567b" testId="8301ccde-7ff9-6561-939c-88301e2472c3" testName="ResultError_WithTitle_WithStatusCode_WithDetails_WithExceptionType_WithMessages_WithErrors" computerName="PC-SFERRARI" duration="00:00:00.0100577" startTime="2023-12-19T13:39:44.0978601+01:00" endTime="2023-12-19T13:39:44.1081830+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9e1c73e8-d9c1-46c1-8ad8-55980e63567b" />
-    <UnitTestResult executionId="89e2a739-155a-4597-aa97-37eb8e2f2ebe" testId="f5dfe5f1-0020-6877-b70a-c0f413465811" testName="BadRequest_WithMessage_WithDetails" computerName="PC-SFERRARI" duration="00:00:00.0974123" startTime="2023-12-19T13:39:43.9931714+01:00" endTime="2023-12-19T13:39:44.0909595+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="89e2a739-155a-4597-aa97-37eb8e2f2ebe" />
+    <UnitTestResult executionId="7939a6d6-cf93-4555-97d3-bc9fb162eecd" testId="fded6add-2af0-3504-d799-aa88e413a666" testName="BadRequest_WithMessages_List_Dictionary" computerName="PC-SFERRARI" duration="00:00:00.0019382" startTime="2023-12-25T16:47:53.5973250+01:00" endTime="2023-12-25T16:47:53.5993997+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7939a6d6-cf93-4555-97d3-bc9fb162eecd" />
+    <UnitTestResult executionId="3309171e-93f3-4867-aa4e-cf4b077479df" testId="4447ae6c-7905-4ed1-25cf-48d401551b77" testName="Ok_WithTitle_WithData" computerName="PC-SFERRARI" duration="00:00:00.0091123" startTime="2023-12-25T16:47:53.6658098+01:00" endTime="2023-12-25T16:47:53.6766279+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3309171e-93f3-4867-aa4e-cf4b077479df" />
+    <UnitTestResult executionId="f5ff500e-d5dd-4ece-9b68-a726aee2bf96" testId="3fd8227f-dbd1-c600-45f2-d4ef7d2b0caf" testName="OK" computerName="PC-SFERRARI" duration="00:00:00.0010399" startTime="2023-12-25T16:47:53.6160563+01:00" endTime="2023-12-25T16:47:53.6173694+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f5ff500e-d5dd-4ece-9b68-a726aee2bf96" />
+    <UnitTestResult executionId="149c2a9d-24f9-423d-95b4-2ddba6e02c80" testId="f5dfe5f1-0020-6877-b70a-c0f413465811" testName="BadRequest_WithMessage_WithDetails" computerName="PC-SFERRARI" duration="00:00:00.0913583" startTime="2023-12-25T16:47:53.5015424+01:00" endTime="2023-12-25T16:47:53.5934260+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="149c2a9d-24f9-423d-95b4-2ddba6e02c80" />
+    <UnitTestResult executionId="fe0faa89-843f-43d6-881a-5f31dfa57ac2" testId="2331984f-ca8a-19fc-9ebe-4e0fffe204ef" testName="Ok_WithData" computerName="PC-SFERRARI" duration="00:00:00.0022249" startTime="2023-12-25T16:47:53.6174508+01:00" endTime="2023-12-25T16:47:53.6198219+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fe0faa89-843f-43d6-881a-5f31dfa57ac2" />
+    <UnitTestResult executionId="21b42745-14d0-4f06-9675-6c88db077c45" testId="8301ccde-7ff9-6561-939c-88301e2472c3" testName="ResultError_WithTitle_WithStatusCode_WithDetails_WithExceptionType_WithMessages_WithErrors" computerName="PC-SFERRARI" duration="00:00:00.0125895" startTime="2023-12-25T16:47:53.6030413+01:00" endTime="2023-12-25T16:47:53.6159536+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="21b42745-14d0-4f06-9675-6c88db077c45" />
+    <UnitTestResult executionId="6b60f12f-3784-4d93-8401-3eafffd42e33" testId="b1367cb5-0a15-8578-0025-e9b6e640042d" testName="BadRequest_WithMessages_List_Tuple" computerName="PC-SFERRARI" duration="00:00:00.0030973" startTime="2023-12-25T16:47:53.5994872+01:00" endTime="2023-12-25T16:47:53.6029634+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6b60f12f-3784-4d93-8401-3eafffd42e33" />
+    <UnitTestResult executionId="96ab236b-4a76-4f83-97e7-d8e184479dd8" testId="166b6717-42c1-7d2d-f61b-5e9611d384f7" testName="BadRequest_WithMessages_List" computerName="PC-SFERRARI" duration="00:00:00.0015608" startTime="2023-12-25T16:47:53.5952760+01:00" endTime="2023-12-25T16:47:53.5972319+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="96ab236b-4a76-4f83-97e7-d8e184479dd8" />
+    <UnitTestResult executionId="3eba98d2-f0b4-45fe-b69c-d66cdfb16b85" testId="dd719bb8-7ad3-aa89-4bab-9742c35164dc" testName="BadRequest_WithMessage" computerName="PC-SFERRARI" duration="00:00:00.0090131" startTime="2023-12-25T16:47:53.4581886+01:00" endTime="2023-12-25T16:47:53.4949315+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3eba98d2-f0b4-45fe-b69c-d66cdfb16b85" />
+    <UnitTestResult executionId="61f21c4a-7c70-41be-8970-0fb628e02a09" testId="1d4a0240-1306-3053-dfec-0c74a1911abe" testName="Ok_WithTitle" computerName="PC-SFERRARI" duration="00:00:00.0003354" startTime="2023-12-25T16:47:53.6198993+01:00" endTime="2023-12-25T16:47:53.6203564+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="61f21c4a-7c70-41be-8970-0fb628e02a09" />
   </Results>
   <TestDefinitions>
     <UnitTest name="BadRequest_WithMessages_List_Tuple" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="b1367cb5-0a15-8578-0025-e9b6e640042d">
-      <Execution id="c23cde00-8ec7-4dc1-a7d4-29d2c756c90b" />
+      <Execution id="6b60f12f-3784-4d93-8401-3eafffd42e33" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultBadRequestTest" name="BadRequest_WithMessages_List_Tuple" />
     </UnitTest>
     <UnitTest name="BadRequest_WithMessages_List_Dictionary" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="fded6add-2af0-3504-d799-aa88e413a666">
-      <Execution id="7dd22df9-891d-4695-8523-b2555d6c08bb" />
+      <Execution id="7939a6d6-cf93-4555-97d3-bc9fb162eecd" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultBadRequestTest" name="BadRequest_WithMessages_List_Dictionary" />
     </UnitTest>
     <UnitTest name="BadRequest_WithMessage_WithDetails" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="f5dfe5f1-0020-6877-b70a-c0f413465811">
-      <Execution id="89e2a739-155a-4597-aa97-37eb8e2f2ebe" />
+      <Execution id="149c2a9d-24f9-423d-95b4-2ddba6e02c80" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultBadRequestTest" name="BadRequest_WithMessage_WithDetails" />
     </UnitTest>
     <UnitTest name="Ok_WithTitle" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="1d4a0240-1306-3053-dfec-0c74a1911abe">
-      <Execution id="a5a84337-5940-46a1-b2f9-50cd8bb06ec6" />
+      <Execution id="61f21c4a-7c70-41be-8970-0fb628e02a09" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultOkTest" name="Ok_WithTitle" />
     </UnitTest>
     <UnitTest name="Ok_WithData" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="2331984f-ca8a-19fc-9ebe-4e0fffe204ef">
-      <Execution id="b8853616-3800-48d1-afec-c08b6f7037c3" />
+      <Execution id="fe0faa89-843f-43d6-881a-5f31dfa57ac2" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultOkTest" name="Ok_WithData" />
     </UnitTest>
     <UnitTest name="BadRequest_WithMessages_List" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="166b6717-42c1-7d2d-f61b-5e9611d384f7">
-      <Execution id="0fd40674-6a63-495b-8607-02c2dd667d59" />
+      <Execution id="96ab236b-4a76-4f83-97e7-d8e184479dd8" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultBadRequestTest" name="BadRequest_WithMessages_List" />
     </UnitTest>
     <UnitTest name="ResultError_WithTitle_WithStatusCode_WithDetails_WithExceptionType_WithMessages_WithErrors" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="8301ccde-7ff9-6561-939c-88301e2472c3">
-      <Execution id="9e1c73e8-d9c1-46c1-8ad8-55980e63567b" />
+      <Execution id="21b42745-14d0-4f06-9675-6c88db077c45" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultErrorTest" name="ResultError_WithTitle_WithStatusCode_WithDetails_WithExceptionType_WithMessages_WithErrors" />
     </UnitTest>
     <UnitTest name="BadRequest_WithMessage" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="dd719bb8-7ad3-aa89-4bab-9742c35164dc">
-      <Execution id="0d630bb4-6598-48aa-9ab8-8a9f948eb49c" />
+      <Execution id="3eba98d2-f0b4-45fe-b69c-d66cdfb16b85" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultBadRequestTest" name="BadRequest_WithMessage" />
     </UnitTest>
     <UnitTest name="OK" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="3fd8227f-dbd1-c600-45f2-d4ef7d2b0caf">
-      <Execution id="f4f1440c-3f76-4a8d-9e1e-95001c45aa97" />
+      <Execution id="f5ff500e-d5dd-4ece-9b68-a726aee2bf96" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultOkTest" name="OK" />
     </UnitTest>
     <UnitTest name="Ok_WithTitle_WithData" storage="d:\sferrari\01_trabajo\clients\kitpymes\core\kitpymes-core-results\kitpymes.core.results.tests\bin\debug\net8.0\kitpymes.core.results.tests.dll" id="4447ae6c-7905-4ed1-25cf-48d401551b77">
-      <Execution id="236ed93a-16aa-47e4-837a-c1b8714dec97" />
+      <Execution id="3309171e-93f3-4867-aa4e-cf4b077479df" />
       <TestMethod codeBase="D:\SFERRARI\01_TRABAJO\clients\Kitpymes\Core\kitpymes-core-results\Kitpymes.Core.Results.Tests\bin\Debug\net8.0\Kitpymes.Core.Results.Tests.dll" adapterTypeName="executor://mstestadapter/v2" className="Kitpymes.Core.Results.Tests.ResultOkTest" name="Ok_WithTitle_WithData" />
     </UnitTest>
   </TestDefinitions>
   <TestEntries>
-    <TestEntry testId="fded6add-2af0-3504-d799-aa88e413a666" executionId="7dd22df9-891d-4695-8523-b2555d6c08bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="166b6717-42c1-7d2d-f61b-5e9611d384f7" executionId="0fd40674-6a63-495b-8607-02c2dd667d59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="2331984f-ca8a-19fc-9ebe-4e0fffe204ef" executionId="b8853616-3800-48d1-afec-c08b6f7037c3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="dd719bb8-7ad3-aa89-4bab-9742c35164dc" executionId="0d630bb4-6598-48aa-9ab8-8a9f948eb49c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="1d4a0240-1306-3053-dfec-0c74a1911abe" executionId="a5a84337-5940-46a1-b2f9-50cd8bb06ec6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="3fd8227f-dbd1-c600-45f2-d4ef7d2b0caf" executionId="f4f1440c-3f76-4a8d-9e1e-95001c45aa97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="4447ae6c-7905-4ed1-25cf-48d401551b77" executionId="236ed93a-16aa-47e4-837a-c1b8714dec97" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="b1367cb5-0a15-8578-0025-e9b6e640042d" executionId="c23cde00-8ec7-4dc1-a7d4-29d2c756c90b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="8301ccde-7ff9-6561-939c-88301e2472c3" executionId="9e1c73e8-d9c1-46c1-8ad8-55980e63567b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="f5dfe5f1-0020-6877-b70a-c0f413465811" executionId="89e2a739-155a-4597-aa97-37eb8e2f2ebe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fded6add-2af0-3504-d799-aa88e413a666" executionId="7939a6d6-cf93-4555-97d3-bc9fb162eecd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4447ae6c-7905-4ed1-25cf-48d401551b77" executionId="3309171e-93f3-4867-aa4e-cf4b077479df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3fd8227f-dbd1-c600-45f2-d4ef7d2b0caf" executionId="f5ff500e-d5dd-4ece-9b68-a726aee2bf96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f5dfe5f1-0020-6877-b70a-c0f413465811" executionId="149c2a9d-24f9-423d-95b4-2ddba6e02c80" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2331984f-ca8a-19fc-9ebe-4e0fffe204ef" executionId="fe0faa89-843f-43d6-881a-5f31dfa57ac2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8301ccde-7ff9-6561-939c-88301e2472c3" executionId="21b42745-14d0-4f06-9675-6c88db077c45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1367cb5-0a15-8578-0025-e9b6e640042d" executionId="6b60f12f-3784-4d93-8401-3eafffd42e33" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="166b6717-42c1-7d2d-f61b-5e9611d384f7" executionId="96ab236b-4a76-4f83-97e7-d8e184479dd8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dd719bb8-7ad3-aa89-4bab-9742c35164dc" executionId="3eba98d2-f0b4-45fe-b69c-d66cdfb16b85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d4a0240-1306-3053-dfec-0c74a1911abe" executionId="61f21c4a-7c70-41be-8970-0fb628e02a09" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <TestLists>
     <TestList name="Resultados sin formato de lista" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />

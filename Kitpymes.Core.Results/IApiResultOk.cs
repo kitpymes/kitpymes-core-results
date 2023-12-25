@@ -7,28 +7,11 @@
 
 namespace Kitpymes.Core.Results;
 
-using System.Net;
-
 /// <summary>
 /// Resultado.
 /// </summary>
-public interface IApiResultOk
+public interface IApiResultOk : IApiResultBase
 {
-    /// <summary>
-    /// Obtiene un valor que indica si el proceso fue correcto.
-    /// </summary>
-    bool Success { get; }
-
-    /// <summary>
-    /// Obtiene un valor que indica el código del estado de la solicitud HTTP.
-    /// </summary>
-    int? Status { get; }
-
-    /// <summary>
-    /// Obtiene un valor que indica el título del resultado.
-    /// </summary>
-    string? Title { get; }
-
     /// <summary>
     /// Obtiene un objeto con datos.
     /// </summary>

@@ -12,23 +12,8 @@ using System.Collections.Generic;
 /// <summary>
 /// Resultado.
 /// </summary>
-public interface IApiResultError
+public interface IApiResultError : IApiResultBase
 {
-    /// <summary>
-    /// Obtiene un valor que indica si el proceso fue correcto.
-    /// </summary>
-    bool Success { get; }
-
-    /// <summary>
-    /// Obtiene un valor que indica el código del estado de la solicitud HTTP.
-    /// </summary>
-    int? Status { get; }
-
-    /// <summary>
-    /// Obtiene un valor que indica el título del resultado.
-    /// </summary>
-    string? Title { get; }
-
     /// <summary>
     /// Obtiene un valor que indica el id del error.
     /// </summary>

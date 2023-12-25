@@ -115,7 +115,7 @@ public class ResultOptionsError
 
             foreach (var (fieldName, message) in errors)
             {
-                keyValuePairs.AddOrUpdate(fieldName, message);
+                keyValuePairs.ToAddOrUpdate(fieldName, message);
             }
 
             ResultSettings.AddErrors(keyValuePairs);

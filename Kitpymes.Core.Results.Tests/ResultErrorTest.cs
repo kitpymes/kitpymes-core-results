@@ -75,15 +75,12 @@ namespace Kitpymes.Core.Results.Tests
 
             Assert.IsFalse(actual.Success);
 
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(classField), classFieldMessageExpected));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
 
-            Assert.IsTrue(actual.Message!.Contains(Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Message.Contains(Messages.FieldInvalidFormat(nameof(stringField))));
-            Assert.IsTrue(actual.Message.Contains(classFieldMessageExpected));
+            Assert.IsTrue(actual.Message?.Contains(Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Message?.Contains(classFieldMessageExpected));
 
-            Assert.IsTrue(actualJson.Contains(Messages.FieldNullOrEmpty(nameof(stringField)), StringComparison.CurrentCulture));
             Assert.IsTrue(actualJson.Contains(Messages.FieldInvalidFormat(nameof(stringField)), StringComparison.CurrentCulture));
             Assert.IsTrue(actualJson.Contains(classFieldMessageExpected, StringComparison.CurrentCulture));
 

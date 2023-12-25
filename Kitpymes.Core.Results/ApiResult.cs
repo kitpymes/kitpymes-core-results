@@ -36,17 +36,23 @@ public class ApiResult : IApiResult
     /// <param name="success">Si el proceso se ejecuto correctamente.</param>
     private ApiResult(bool success) => Success = success;
 
-    /// <inheritdoc/>
-    public string? TraceId { get; private set; }
-
-    /// <inheritdoc/>
+    /// <summary>
+    /// Obtiene un valor que indica si el proceso fue correcto.
+    /// </summary>
     public bool Success { get; private set; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Obtiene un valor que indica el código del estado de la solicitud HTTP.
+    /// </summary>
     public int? Status { get; private set; }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Obtiene un valor que indica el título del resultado.
+    /// </summary>
     public string? Title { get; private set; }
+
+    /// <inheritdoc/>
+    public string? TraceId { get; private set; }
 
     /// <inheritdoc/>
     public string? Exception { get; private set; }

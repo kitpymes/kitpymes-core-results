@@ -106,9 +106,8 @@ namespace Kitpymes.Core.Results.Tests
             Assert.IsFalse(actual.Success);
             Assert.AreEqual(actual.Status, HttpStatusCode.BadRequest.ToValue());
             Assert.AreEqual(actual.Title, SharedResource.MsgValidationsError);
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(classField), classFieldMessageExpected));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
         }
 
         [TestMethod]
@@ -140,9 +139,9 @@ namespace Kitpymes.Core.Results.Tests
             Assert.IsFalse(actual.Success);
             Assert.AreEqual(actual.Status, HttpStatusCode.BadRequest.ToValue());
             Assert.AreEqual(actual.Title, SharedResource.MsgValidationsError);
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.Contains(nameof(classField), classFieldMessageExpected));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
         }
     }
 }

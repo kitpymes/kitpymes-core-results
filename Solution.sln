@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitpymes.Core.Results", "Ki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitpymes.Core.Results.Tests", "Kitpymes.Core.Results.Tests\Kitpymes.Core.Results.Tests.csproj", "{C6E6E2A1-442D-43A4-A18B-38B7A3F67805}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Api.Result", "tests\Tests.Api.Result\Tests.Api.Result.csproj", "{0FA0064C-2148-4A30-9683-B1F1F489A6A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{C6E6E2A1-442D-43A4-A18B-38B7A3F67805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6E6E2A1-442D-43A4-A18B-38B7A3F67805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6E6E2A1-442D-43A4-A18B-38B7A3F67805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA0064C-2148-4A30-9683-B1F1F489A6A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA0064C-2148-4A30-9683-B1F1F489A6A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA0064C-2148-4A30-9683-B1F1F489A6A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA0064C-2148-4A30-9683-B1F1F489A6A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{4AB602EE-B6A8-4747-B38E-28FB206C515F} = {ED7CEF96-5D02-4528-9063-69CD9D6DCAAC}
 		{9865DDDD-C2E1-4B44-A76A-2B63AAD0D36A} = {05B0C26C-3AE9-46C9-A755-6C7592C3FAC6}
 		{CE9AB0B1-276E-48C1-9A2C-26AB12D1BCA4} = {05B0C26C-3AE9-46C9-A755-6C7592C3FAC6}
+		{0FA0064C-2148-4A30-9683-B1F1F489A6A0} = {092AD1DF-25EE-48CC-838A-AE5C83CF24EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D725F14-B824-4C2A-A1C4-6009225D97E2}
