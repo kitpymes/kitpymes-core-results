@@ -1,4 +1,4 @@
-// -----------------------------------------------------------------------
+ï»¿// -----------------------------------------------------------------------
 // <copyright file="IApiResultBase.cs" company="Kitpymes">
 // Copyright (c) Kitpymes. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project docs folder for full license information.
@@ -18,12 +18,12 @@ public interface IApiResultBase
     bool Success { get; }
 
     /// <summary>
-    /// Obtiene un valor que indica el código del estado de la solicitud HTTP.
+    /// Obtiene un valor que indica el cÃ³digo del estado de la solicitud HTTP.
     /// </summary>
     int? Status { get; }
 
     /// <summary>
-    /// Obtiene un valor que indica el título del resultado.
+    /// Obtiene un valor que indica el tÃ­tulo del resultado.
     /// </summary>
     string? Title { get; }
 }

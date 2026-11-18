@@ -1,4 +1,4 @@
-// -----------------------------------------------------------------------
+ï»¿// -----------------------------------------------------------------------
 // <copyright file="ApiResult.cs" company="Kitpymes">
 // Copyright (c) Kitpymes. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project docs folder for full license information.
@@ -18,15 +18,15 @@ using Kitpymes.Core.Shared.Util;
 
 /*
     Clase de resultados ApiResult
-    Contiene los métodos que devuelven los resultados
+    Contiene los mÃ©todos que devuelven los resultados
 */
 
 /// <summary>
 /// Clase de resultados <c>Result</c>.
-/// Contiene los métodos que devuelven los resultados.
+/// Contiene los mÃ©todos que devuelven los resultados.
 /// </summary>
 /// <remarks>
-/// <para>En esta clase se pueden agregar todos los métodos que devuelven resultados.</para>
+/// <para>En esta clase se pueden agregar todos los mÃ©todos que devuelven resultados.</para>
 /// </remarks>
 public class ApiResult : IApiResult
 {
@@ -42,12 +42,12 @@ public class ApiResult : IApiResult
     public bool Success { get; private set; }
 
     /// <summary>
-    /// Obtiene un valor que indica el código del estado de la solicitud HTTP.
+    /// Obtiene un valor que indica el cÃ³digo del estado de la solicitud HTTP.
     /// </summary>
     public int? Status { get; private set; }
 
     /// <summary>
-    /// Obtiene un valor que indica el título del resultado.
+    /// Obtiene un valor que indica el tÃ­tulo del resultado.
     /// </summary>
     public string? Title { get; private set; }
 
@@ -72,7 +72,7 @@ public class ApiResult : IApiResult
     #region Ok
 
     /// <summary>
-    /// Devuelve un resultado de ejecución correcta.
+    /// Devuelve un resultado de ejecuciÃ³n correcta.
     /// <para><strong>OK:</strong> 200.</para>
     /// </summary>
     /// <returns>ApiResult.</returns>
@@ -82,7 +82,7 @@ public class ApiResult : IApiResult
     /// <summary>
     /// Agrega uno o varios resultados al resultado.
     /// </summary>
-    /// <param name="options">Configuración del resultado.</param>
+    /// <param name="options">ConfiguraciÃ³n del resultado.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult Ok(Action<ResultOptionsOk> options)
     {
@@ -101,7 +101,7 @@ public class ApiResult : IApiResult
     #region BadRequest
 
     /// <summary>
-    /// Devuelve un resultado de error de validación.
+    /// Devuelve un resultado de error de validaciÃ³n.
     /// <para><strong>BadRequest:</strong> 400.</para>
     /// </summary>
     /// <param name="message">Agrega un mensaje al resultado.</param>
@@ -113,11 +113,11 @@ public class ApiResult : IApiResult
             .WithTitle(SharedResource.MsgValidationsError));
 
     /// <summary>
-    /// Devuelve un resultado de error de validación.
+    /// Devuelve un resultado de error de validaciÃ³n.
     /// <para><strong>BadRequest:</strong> 400.</para>
     /// </summary>
     /// <param name="message">Agrega un mensaje al resultado.</param>
-    /// <param name="details">Detalles que se muestran solo en ambientes distintos al de producción.</param>
+    /// <param name="details">Detalles que se muestran solo en ambientes distintos al de producciÃ³n.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult BadRequest(string message, object details)
         => Error(x => x
@@ -127,10 +127,10 @@ public class ApiResult : IApiResult
             .WithTitle(SharedResource.MsgValidationsError));
 
     /// <summary>
-    /// Devuelve un resultado de error de validación.
+    /// Devuelve un resultado de error de validaciÃ³n.
     /// <para><strong>BadRequest:</strong> 400.</para>
     /// </summary>
-    /// <param name="messages">Agrega mensajes de validación al resultado.</param>
+    /// <param name="messages">Agrega mensajes de validaciÃ³n al resultado.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult BadRequest(IEnumerable<string> messages)
         => Error(x => x
@@ -139,10 +139,10 @@ public class ApiResult : IApiResult
             .WithTitle(SharedResource.MsgValidationsError));
 
     /// <summary>
-    /// Devuelve un resultado de error de validación.
+    /// Devuelve un resultado de error de validaciÃ³n.
     /// <para><strong>BadRequest:</strong> 400.</para>
     /// </summary>
-    /// <param name="errors">Agrega los errores de validación al resultado.</param>
+    /// <param name="errors">Agrega los errores de validaciÃ³n al resultado.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult BadRequest(IDictionary<string, IEnumerable<string>> errors)
         => Error(x => x
@@ -151,10 +151,10 @@ public class ApiResult : IApiResult
             .WithTitle(SharedResource.MsgValidationsError));
 
     /// <summary>
-    /// Devuelve un resultado de error de validación.
+    /// Devuelve un resultado de error de validaciÃ³n.
     /// <para><strong>BadRequest:</strong> 400.</para>
     /// </summary>
-    /// <param name="errors">Agrega los errores de validación al resultado.</param>
+    /// <param name="errors">Agrega los errores de validaciÃ³n al resultado.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult BadRequest(IEnumerable<(string fieldName, string message)> errors)
         => Error(x => x
@@ -167,7 +167,7 @@ public class ApiResult : IApiResult
     /// <summary>
     /// Agrega uno o varios errores al resultado.
     /// </summary>
-    /// <param name="options">Configuración de la lista de errores.</param>
+    /// <param name="options">ConfiguraciÃ³n de la lista de errores.</param>
     /// <returns>ApiResult.</returns>
     public static ApiResult Error(Action<ResultOptionsError> options)
     {

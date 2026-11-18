@@ -1,6 +1,6 @@
 ﻿**Extensiones y utilidades comunes compartidas en los proyectos**
 
-[![Build Status](https://github.com/kitpymes/template-netcore-results/workflows/Kitpymes.Core.Results/badge.svg)](https://github.com/kitpymes/template-netcore-results/actions) [![NuGet Status](https://img.shields.io/nuget/v/Kitpymes.Core.Shared)](https://www.nuget.org/packages/Kitpymes.Core.Results/) [![NuGet Download](https://img.shields.io/nuget/dt/Kitpymes.Core.Results)](https://www.nuget.org/stats/packages/Kitpymes.Core.Results?groupby=Version) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kitpymes/template-netcore-results/blob/master/docs/LICENSE.txt) [![Size Repo](https://img.shields.io/github/repo-size/kitpymes/template-netcore-results)](https://github.com/kitpymes/template-netcore-results/) [![Last Commit](https://img.shields.io/github/last-commit/kitpymes/template-netcore-results)](https://github.com/kitpymes/template-netcore-results/) 
+[![Build Status](https://github.com/kitpymes/kitpymes-core-results/actions/workflows/ci.yml/badge.svg)](https://github.com/kitpymes/kitpymes-core-results/actions/workflows/ci.yml) [![NuGet Status](https://img.shields.io/nuget/v/Kitpymes.Core.Shared)](https://www.nuget.org/packages/Kitpymes.Core.Results/) [![NuGet Download](https://img.shields.io/nuget/dt/Kitpymes.Core.Results)](https://www.nuget.org/stats/packages/Kitpymes.Core.Results?groupby=Version) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/kitpymes/kitpymes-core-results/blob/master/docs/LICENSE.txt) [![Size Repo](https://img.shields.io/github/repo-size/kitpymes/kitpymes-core-results)](https://github.com/kitpymes/kitpymes-core-results/) [![Last Commit](https://img.shields.io/github/last-commit/kitpymes/kitpymes-core-results)](https://github.com/kitpymes/kitpymes-core-results/) 
 
 
 ## 📋 Requerimientos 
@@ -48,7 +48,7 @@ dotnet add package Kitpymes.Core.Results
 
 ## 📄 Licencia 
 
-* Este proyecto está bajo la Licencia [LICENSE](https://raw.githubusercontent.com/kitpymes/template-netcore-results/master/docs/LICENSE.txt)
+* Este proyecto está bajo la Licencia [LICENSE](https://raw.githubusercontent.com/kitpymes/kitpymes-core-results/master/docs/LICENSE.txt)
 
 
 ## 🎁 Gratitud 
