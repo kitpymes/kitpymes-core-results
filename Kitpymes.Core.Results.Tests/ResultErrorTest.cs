@@ -21,7 +21,7 @@ namespace Kitpymes.Core.Results.Tests
             var stringField = FakeTypes.ReferenceTypes.ClassTypes.String_Null;
             var classField = FakeTypes.ReferenceTypes.ClassTypes.Class_Null;
 
-            var classFieldMessageExpected = Messages.FieldNullOrEmpty(nameof(classField));
+            var classFieldMessageExpected = Messages.NullOrEmpty(nameof(classField));
             var titleExpected = Guid.NewGuid().ToString();
             var messageExpected = Guid.NewGuid().ToString();
             var statusCodeExpected = HttpStatusCode.BadRequest;
@@ -37,12 +37,12 @@ namespace Kitpymes.Core.Results.Tests
 
             if (stringField.ToIsNullOrEmpty())
             {
-                errors.Add((nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
+                errors.Add((nameof(stringField), Messages.NullOrEmpty(nameof(stringField))));
             }
 
             if (!stringField.ToIsEmail())
             {
-                errors.Add((nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+                errors.Add((nameof(stringField), Messages.InvalidFormat(nameof(stringField))));
             }
 
             if (classField.ToIsNullOrEmpty())
@@ -75,13 +75,13 @@ namespace Kitpymes.Core.Results.Tests
 
             Assert.IsFalse(actual.Success);
 
-            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.InvalidFormat(nameof(stringField))));
             Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
 
-            Assert.IsTrue(actual.Message?.Contains(Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Message?.Contains(Messages.InvalidFormat(nameof(stringField))));
             Assert.IsTrue(actual.Message?.Contains(classFieldMessageExpected));
 
-            Assert.IsTrue(actualJson.Contains(Messages.FieldInvalidFormat(nameof(stringField)), StringComparison.CurrentCulture));
+            Assert.IsTrue(actualJson.Contains(Messages.InvalidFormat(nameof(stringField)), StringComparison.CurrentCulture));
             Assert.IsTrue(actualJson.Contains(classFieldMessageExpected, StringComparison.CurrentCulture));
 
             Assert.AreEqual(actual.Title, titleExpected);

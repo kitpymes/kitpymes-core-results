@@ -48,18 +48,18 @@ namespace Kitpymes.Core.Results.Tests
         {
             var stringField = FakeTypes.ReferenceTypes.ClassTypes.String_Null;
             var classField = FakeTypes.ReferenceTypes.ClassTypes.Class_Null;
-            var classFieldMessageExpected = Messages.FieldNullOrEmpty(nameof(classField));
+            var classFieldMessageExpected = Messages.NullOrEmpty(nameof(classField));
 
             var messages = new List<string>();
 
             if (stringField.ToIsNullOrEmpty())
             {
-                messages.Add(Messages.FieldNullOrEmpty(nameof(stringField)));
+                messages.Add(Messages.NullOrEmpty(nameof(stringField)));
             }
 
             if (!stringField.ToIsEmail())
             {
-                messages.Add(Messages.FieldInvalidFormat(nameof(stringField)));
+                messages.Add(Messages.InvalidFormat(nameof(stringField)));
             }
 
             if (classField.ToIsNullOrEmpty())
@@ -72,8 +72,8 @@ namespace Kitpymes.Core.Results.Tests
             Assert.IsFalse(actual.Success);
             Assert.AreEqual(actual.Status, HttpStatusCode.BadRequest.ToValue());
             Assert.AreEqual(actual.Title, SharedResource.MsgValidationsError);
-            Assert.IsTrue(actual.Message!.Contains(Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Message.Contains(Messages.FieldNullOrEmpty(nameof(stringField))));
+            Assert.IsTrue(actual.Message!.Contains(Messages.NullOrEmpty(nameof(stringField))));
+            Assert.IsTrue(actual.Message.Contains(Messages.NullOrEmpty(nameof(stringField))));
             Assert.IsTrue(actual.Message.Contains(classFieldMessageExpected));
         }
 
@@ -82,18 +82,18 @@ namespace Kitpymes.Core.Results.Tests
         {
             var stringField = FakeTypes.ReferenceTypes.ClassTypes.String_Null;
             var classField = FakeTypes.ReferenceTypes.ClassTypes.Class_Null;
-            var classFieldMessageExpected = Messages.FieldNullOrEmpty(nameof(classField));
+            var classFieldMessageExpected = Messages.NullOrEmpty(nameof(classField));
 
             var errors = new List<(string fieldName, string message)>();
 
             if (stringField.ToIsNullOrEmpty())
             {
-                errors.Add((nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
+                errors.Add((nameof(stringField), Messages.NullOrEmpty(nameof(stringField))));
             }
 
             if (!stringField.ToIsEmail())
             {
-                errors.Add((nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+                errors.Add((nameof(stringField), Messages.InvalidFormat(nameof(stringField))));
             }
 
             if (classField.ToIsNullOrEmpty())
@@ -106,7 +106,7 @@ namespace Kitpymes.Core.Results.Tests
             Assert.IsFalse(actual.Success);
             Assert.AreEqual(actual.Status, HttpStatusCode.BadRequest.ToValue());
             Assert.AreEqual(actual.Title, SharedResource.MsgValidationsError);
-            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.InvalidFormat(nameof(stringField))));
             Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
         }
 
@@ -115,18 +115,18 @@ namespace Kitpymes.Core.Results.Tests
         {
             var stringField = FakeTypes.ReferenceTypes.ClassTypes.String_Null;
             var classField = FakeTypes.ReferenceTypes.ClassTypes.Class_Null;
-            var classFieldMessageExpected = Messages.FieldNullOrEmpty(nameof(classField));
+            var classFieldMessageExpected = Messages.NullOrEmpty(nameof(classField));
 
             var errors = new Dictionary<string, IEnumerable<string>>();
 
             if (stringField.ToIsNullOrEmpty())
             {
-                errors.Add(nameof(stringField), new List<string> { Messages.FieldNullOrEmpty(nameof(stringField)) });
+                errors.Add(nameof(stringField), new List<string> { Messages.NullOrEmpty(nameof(stringField)) });
             }
 
             if (!stringField.ToIsEmail())
             {
-                errors[nameof(stringField)] = errors[nameof(stringField)].Concat(new string[] { Messages.FieldInvalidFormat(nameof(stringField)) });
+                errors[nameof(stringField)] = errors[nameof(stringField)].Concat(new string[] { Messages.InvalidFormat(nameof(stringField)) });
             }
 
             if (classField.ToIsNullOrEmpty())
@@ -139,8 +139,8 @@ namespace Kitpymes.Core.Results.Tests
             Assert.IsFalse(actual.Success);
             Assert.AreEqual(actual.Status, HttpStatusCode.BadRequest.ToValue());
             Assert.AreEqual(actual.Title, SharedResource.MsgValidationsError);
-            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldNullOrEmpty(nameof(stringField))));
-            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.FieldInvalidFormat(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.NullOrEmpty(nameof(stringField))));
+            Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(stringField), Messages.InvalidFormat(nameof(stringField))));
             Assert.IsTrue(actual.Errors.ToContainsKeyValue(nameof(classField), classFieldMessageExpected));
         }
     }
