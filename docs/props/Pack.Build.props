@@ -12,7 +12,7 @@
         <Owners>Kitpymes</Owners>
         <Title>Kitpymes.Core.Results</Title>
         <Copyright>Copyright © $([System.DateTime]::Now.Year) by Kitpymes and Contributors. All rights reserved.</Copyright>
-        <Description>Extensiones y utilidades comunes compartidas en los proyectos.</Description>
+        <Description>Resultados estándar para operaciones y respuestas de API (ApiResult).</Description>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageLicenseType>file</PackageLicenseType>
@@ -22,7 +22,7 @@
         <PackageReleaseNotes>https://github.com/kitpymes/kitpymes-core-results/blob/master/docs/RELEASE_NOTES.txt</PackageReleaseNotes>
         <RepositoryUrl>https://github.com/kitpymes/kitpymes-core-results</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>Extensions, Extensiones, Utilities, Util, Utilidades, Results, Common</PackageTags>
+        <PackageTags>Results, Resultados, ApiResult, Api</PackageTags>
       </PropertyGroup>
 
       <ItemGroup>
