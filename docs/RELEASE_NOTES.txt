@@ -1,3 +1,8 @@
+# v.1.0.1
+- El paquete incluye el README (en la 1.0.0 NuGet no lo mostraba).
+- Descripción y etiquetas del paquete propias (eran las de Shared).
+- README: requisitos actualizados a .NET 10 y distintivo de NuGet de esta librería.
+
 # v.1.0.0
 - Primera versión publicada.
 - ApiResult: resultado estándar para respuestas de API, con Success, Status, Title, Message, Data, Errors, TraceId y Exception.

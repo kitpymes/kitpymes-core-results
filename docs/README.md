@@ -11,13 +11,13 @@
 
 ## 📋 Requerimientos 
 
-* Visual Studio = 2022
+* Visual Studio 2026 o superior
 
-* NET TargetFramework = net8.0
+* NET TargetFramework = net10.0
 
-* Net Core SDK = 8.0.x
+* SDK de .NET = 10.0.x
 
-* C# = 12
+* C# = 14
 
 * Conocimientos sobre Inyección de Dependencias
 
