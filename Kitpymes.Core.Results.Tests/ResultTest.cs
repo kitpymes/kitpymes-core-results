@@ -61,12 +61,19 @@ namespace Kitpymes.Core.Results.Tests
         }
 
         [TestMethod]
-        public void SuccessOfT_Passing_ValueFromGenericType_Returns_SameAsNonGenericFactory()
+        public void SuccessOfT_Passing_ValueFromGenericType_Returns_SuccessWithValue()
         {
             var actual = Result<string>.Success("a");
 
             Assert.IsTrue(actual.IsSuccess);
             Assert.AreEqual("a", actual.Value);
+        }
+
+        [TestMethod]
+        public void SuccessOfT_Passing_Null_Throws_ArgumentNullException()
+        {
+            Assert.ThrowsExactly<ArgumentNullException>(() => Result.Success<string?>(null));
+            Assert.ThrowsExactly<ArgumentNullException>(() => Result<string>.Success(null!));
         }
 
         [TestMethod]

@@ -60,10 +60,10 @@ var result = Handle(query);
 
 if (result.IsFailure)
 {
-    // result.Error: Code, Message, Type y Fields (errores por campo).
+    return result.Error; // Code, Message, Type y Fields (errores por campo)
 }
 
-var dto = result.Value; // el compilador avisa si no se ha comprobado IsSuccess antes
+var name = result.Value.Name; // sin la comprobación de arriba, el compilador avisaría al usar Value (CS8602)
 ```
 
 - **Códigos de error** con la forma `<Modulo>.<Motivo>` (PascalCase, ASCII, sin espacios), por ejemplo `Users.EmailDuplicado`. Son contrato con quien los consume: una vez publicados no se renombran. Las fábricas de `Error` rechazan un código que no siga la forma.
@@ -71,6 +71,7 @@ var dto = result.Value; // el compilador avisa si no se ha comprobado IsSuccess 
 - **Errores por campo** sólo en `Error.Validation(code, message, fields)`, cada uno con campo, código y mensaje.
 - **No hay conversión implícita desde el valor** (`Result<int> r = 5;` no compila): con nulos, interfaces, `Result<Error>` o `Result<Result>` daría errores o éxitos falsos. Se usa `Result.Success(valor)`.
 - **`Result.FailureFor<TResult>(error)`** crea el fallo de un tipo genérico (`Result` o `Result<T>`); lo usa el mediador.
+- **`Result.Success(null)` lanza `ArgumentNullException`:** un éxito siempre lleva valor.
 - **`Value` lanza `InvalidOperationException`** si el resultado es un fallo. Con tipos de valor (`Result<int>`) el compilador no puede avisar: compruebe `IsSuccess` o use `TryGetValue`.
 
 ### Traducción a la API

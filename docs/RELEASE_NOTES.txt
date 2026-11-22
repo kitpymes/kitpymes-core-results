@@ -1,13 +1,14 @@
 # v.1.1.0
 - Nuevo: Result y Result<T> para dominio y aplicación, sin nada de HTTP. Los errores de negocio se devuelven en el resultado.
-- Nuevo: Error con Code (forma <Modulo>.<Motivo>, comprobada al crearlo), Message, Type (Validation, NotFound, Conflict, Unauthorized, Forbidden, NotContracted, Unexpected) y errores por campo (FieldError: campo, código y mensaje).
+- Nuevo: Error con Code (forma <Modulo>.<Motivo>, comprobada al crearlo), Message, Type (Validation, NotFound, Conflict, Unauthorized, Forbidden, NotContracted, Unexpected) y errores por campo (FieldError: campo, código con la misma forma y mensaje).
 - Nuevo: conversión implícita de Error a Result y a Result<T>. No hay conversión implícita desde el valor; se usa Result.Success(valor).
+- Nuevo: Result<T>.TryGetValue(out value). Result.Success(null) lanza ArgumentNullException: un éxito siempre lleva valor.
 - Nuevo: Result.FailureFor<TResult>(error) crea el fallo de un tipo genérico (pensado para el mediador).
 - Nuevo: result.ToApiResult() traduce a ApiResult (400, 404, 409, 401, 403, 403, 500) y nunca copia excepciones. ErrorType.ToStatusCode() da el código HTTP.
-- Nuevo: ApiResult e IApiResultError tienen Code y FieldErrors. En la interfaz tienen implementación por defecto (null): las implementaciones propias siguen compilando. Las respuestas JSON llevan estos dos campos nuevos.
+- Nuevo: ApiResult e IApiResultError tienen Code y FieldErrors; ResultOptionsError.WithCode/WithFieldErrors y ResultSettingsError.Code/FieldErrors para rellenarlos. En la interfaz tienen implementación por defecto (null): las implementaciones propias siguen compilando. Las respuestas JSON llevan estos dos campos nuevos (a null si no se rellenan): ojo con clientes que validen el esquema de forma estricta.
 - Nuevo: analizador KPY0003 dentro del paquete. Da error si se tira un Result sin mirarlo (también tras await o si es un Task<Result> sin esperar); '_ =' es el descarte explícito. Se puede bajar en .editorconfig.
 - Aviso: los nombres nuevos Result y Error pueden chocar (CS0104) con otras librerías de resultados importadas en el mismo fichero; se resuelve con un alias de using.
-- Sin cambios que rompan la 1.0.1 (comprobado con la validación de paquete contra la 1.0.1).
+- Sin cambios que rompan la 1.0.1. El empaquetado valida la API contra la 1.0.1 (EnablePackageValidation).
 
 # v.1.0.1
 - El paquete incluye el README (en la 1.0.0 NuGet no lo mostraba).

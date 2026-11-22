@@ -18,12 +18,14 @@ public sealed class FieldError
     /// Inicializa una nueva instancia de la clase <see cref="FieldError"/>.
     /// </summary>
     /// <param name="field">Nombre del campo.</param>
-    /// <param name="code">Código estable del error (p. ej. <c>Validations.Requerido</c>).</param>
+    /// <param name="code">Código estable del error, con la misma forma que <see cref="Error.Code"/> (p. ej. <c>Validations.Requerido</c>).</param>
     /// <param name="message">Mensaje legible.</param>
     public FieldError(string field, string code, string message)
     {
         Field = Required(field, nameof(field));
-        Code = Required(code, nameof(code));
+        Code = Error.IsValidCode(code)
+            ? code
+            : throw new ArgumentException($"El código '{code}' no sigue la forma <Modulo>.<Motivo> (p. ej. Validations.Requerido).", nameof(code));
         Message = Required(message, nameof(message));
     }
 

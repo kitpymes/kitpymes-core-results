@@ -129,6 +129,8 @@ namespace Kitpymes.Core.Results.Tests
         [DataRow(null, "Validations.Requerido", "Obligatorio.", "field")]
         [DataRow(" ", "Validations.Requerido", "Obligatorio.", "field")]
         [DataRow("Email", "", "Obligatorio.", "code")]
+        [DataRow("Email", "requerido", "Obligatorio.", "code")]
+        [DataRow("Email", "Validations.Campo Requerido", "Obligatorio.", "code")]
         [DataRow("Email", "Validations.Requerido", null, "message")]
         public void FieldError_Passing_EmptyValue_Throws_ArgumentExceptionWithItsName(string? field, string? code, string? message, string expectedParam)
         {

@@ -101,6 +101,9 @@ jobs:
           unzip -l "$pkg"
           unzip -l "$pkg" | grep -q 'analyzers/dotnet/cs/Kitpymes.Core.Results.Analyzers.dll' || { echo "::error::El paquete no lleva el analizador."; exit 1; }
           if ls artifacts/*.nupkg | grep -v -E '/Kitpymes\.Core\.Results\.[0-9]'; then echo "::error::Se ha empaquetado un proyecto que no es Results."; exit 1; fi
+          unzip -p "$pkg" '*.nuspec' > paquete.nuspec
+          cat paquete.nuspec
+          if grep -q 'Kitpymes.Core.Results.Analyzers' paquete.nuspec; then echo "::error::El paquete declara una dependencia del analizador."; exit 1; fi
 
   # En cada rama (lo que luego es un PR) comprueba que nuget.org confía en este repo
   # (política de Trusted Publishing). Sin ella, fusionar un cambio de versión fallaría al
