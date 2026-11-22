@@ -1,6 +1,6 @@
 ﻿# <img src="https://github.com/kitpymes/kitpymes-core-results/raw/master/docs/images/logo.png" height="30px"> Kitpymes.Core.Results
 
-**Extensiones y utilidades comunes compartidas en los proyectos**
+**Resultados estándar: `Result` y `Result<T>` para dominio y aplicación, y `ApiResult` para la API**
 
 [![Build Status](https://github.com/kitpymes/kitpymes-core-results/actions/workflows/ci.yml/badge.svg)](https://github.com/kitpymes/kitpymes-core-results/actions/workflows/ci.yml)
 [![NuGet Status](https://img.shields.io/nuget/v/Kitpymes.Core.Results)](https://www.nuget.org/packages/Kitpymes.Core.Results/)
@@ -39,8 +39,61 @@ dotnet add package Kitpymes.Core.Results
 
 ## ⌨️ Código
 
+### Result y Result&lt;T&gt; (desde la 1.1.0)
 
-### Extensions
+Dominio y aplicación devuelven `Result` o `Result<T>`, que no saben nada de HTTP. Los errores de negocio van en el resultado, nunca como excepciones.
+
+```cs
+public Result<UserDto> Handle(GetUserQuery query)
+{
+    var user = _users.Find(query.Id);
+
+    if (user is null)
+    {
+        return Error.NotFound("Users.NoExiste", "El usuario no existe."); // conversión implícita desde Error
+    }
+
+    return Result.Success(new UserDto(user));
+}
+
+var result = Handle(query);
+
+if (result.IsFailure)
+{
+    // result.Error: Code, Message, Type y Fields (errores por campo).
+}
+
+var dto = result.Value; // el compilador avisa si no se ha comprobado IsSuccess antes
+```
+
+- **Códigos de error** con la forma `<Modulo>.<Motivo>` (PascalCase, ASCII, sin espacios), por ejemplo `Users.EmailDuplicado`. Son contrato con quien los consume: una vez publicados no se renombran. Las fábricas de `Error` rechazan un código que no siga la forma.
+- **Tipos de error:** `Validation`, `NotFound`, `Conflict`, `Unauthorized` (sólo "no identificado"), `Forbidden`, `NotContracted` (módulo no contratado) y `Unexpected`.
+- **Errores por campo** sólo en `Error.Validation(code, message, fields)`, cada uno con campo, código y mensaje.
+- **No hay conversión implícita desde el valor** (`Result<int> r = 5;` no compila): con nulos, interfaces, `Result<Error>` o `Result<Result>` daría errores o éxitos falsos. Se usa `Result.Success(valor)`.
+- **`Result.FailureFor<TResult>(error)`** crea el fallo de un tipo genérico (`Result` o `Result<T>`); lo usa el mediador.
+- **`Value` lanza `InvalidOperationException`** si el resultado es un fallo. Con tipos de valor (`Result<int>`) el compilador no puede avisar: compruebe `IsSuccess` o use `TryGetValue`.
+
+### Traducción a la API
+
+```cs
+ApiResult response = result.ToApiResult();
+```
+
+Validation 400, NotFound 404, Conflict 409, Unauthorized 401, Forbidden 403, NotContracted 403, Unexpected 500. Copia `Code`, `Message` y los errores por campo (`FieldErrors` con código y `Errors` por campo); nunca copia excepciones. `ApiResult.Status` es el código que la capa API tiene que poner en la respuesta HTTP: devolver el objeto sin más responde 200.
+
+### KPY0003
+
+El paquete incluye un analizador que da **error de compilación** si se tira un `Result` sin mirarlo, también tras `await` o si es un `Task<Result>` sin esperar:
+
+```cs
+await _publisher.PublishAsync(evento);      // KPY0003
+var result = await _publisher.PublishAsync(evento); // bien
+_ = await _publisher.PublishAsync(evento);  // descarte explícito: bien
+```
+
+Para bajar la severidad en un proyecto: `dotnet_diagnostic.KPY0003.severity = warning` en `.editorconfig`.
+
+### ApiResult
 
 ```cs
 public class ApiResult : IApiResult
