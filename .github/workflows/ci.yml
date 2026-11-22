@@ -119,10 +119,10 @@ jobs:
 
       # Con --solution: los proyectos usan $(SolutionDir), que sólo existe al compilar desde la solución.
       - name: Mutación de Results
-        run: dotnet stryker --solution Solution.sln --project Kitpymes.Core.Results.csproj --test-project Kitpymes.Core.Results.Tests/Kitpymes.Core.Results.Tests.csproj --reporter markdown --reporter progress --output mutacion/results || echo "::warning::Stryker no terminó en Results."
+        run: dotnet stryker --solution Solution.sln --project Kitpymes.Core.Results.csproj --reporter markdown --reporter progress --output mutacion/results || echo "::warning::Stryker no terminó en Results."
 
       - name: Mutación del analizador
-        run: dotnet stryker --solution Solution.sln --project Kitpymes.Core.Results.Analyzers.csproj --test-project Kitpymes.Core.Results.Analyzers.Tests/Kitpymes.Core.Results.Analyzers.Tests.csproj --reporter markdown --reporter progress --output mutacion/analyzers || echo "::warning::Stryker no terminó en el analizador."
+        run: dotnet stryker --solution Solution.sln --project Kitpymes.Core.Results.Analyzers.csproj --reporter markdown --reporter progress --output mutacion/analyzers || echo "::warning::Stryker no terminó en el analizador."
 
       - name: Resumen
         if: always()
