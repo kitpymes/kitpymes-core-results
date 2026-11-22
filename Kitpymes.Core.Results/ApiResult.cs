@@ -69,6 +69,12 @@ public class ApiResult : IApiResult
     /// <inheritdoc/>
     public IDictionary<string, IEnumerable<string>>? Errors { get; private set; }
 
+    /// <inheritdoc/>
+    public string? Code { get; private set; }
+
+    /// <inheritdoc/>
+    public IReadOnlyList<FieldError>? FieldErrors { get; private set; }
+
     #region Ok
 
     /// <summary>
@@ -184,6 +190,8 @@ public class ApiResult : IApiResult
             Exception = config.Exception,
             Message = config.Messages?.Any() == true ? config.Messages.ToString(", ") : null,
             Errors = config.Errors,
+            Code = config.Code,
+            FieldErrors = config.FieldErrors,
         };
     }
 }
