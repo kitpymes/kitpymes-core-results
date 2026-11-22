@@ -39,14 +39,35 @@ jobs:
         run: dotnet test Solution.sln --no-build -c Debug --collect:"XPlat Code Coverage" --results-directory cobertura
 
       # Muestra el porcentaje de líneas cubiertas por los tests (informativo: no para la pipeline).
+      # Con varios proyectos de tests hay un informe por proyecto: se unen línea a línea
+      # (una línea cuenta como cubierta si algún proyecto la ejecuta) y se da la cifra por ensamblado.
       - name: Cobertura
+        shell: python
         run: |
-          f=$(find cobertura -name coverage.cobertura.xml | head -n 1)
-          if [ -z "$f" ]; then echo "::warning::No se generó el informe de cobertura."; exit 0; fi
-          rate=$(grep -o 'line-rate="[0-9.]*"' "$f" | head -n 1 | grep -o '[0-9.]*')
-          pct=$(awk -v r="$rate" 'BEGIN { printf "%.1f", r * 100 }')
-          echo "Cobertura de líneas: $pct %"
-          echo "### Cobertura de líneas: $pct %" >> "$GITHUB_STEP_SUMMARY"
+          import glob, os, xml.etree.ElementTree as ET
+          files = glob.glob("cobertura/**/coverage.cobertura.xml", recursive=True)
+          if not files:
+              print("::warning::No se generó el informe de cobertura.")
+              raise SystemExit(0)
+          lines = {}
+          for f in files:
+              for package in ET.parse(f).getroot().iter("package"):
+                  name = package.get("name")
+                  for cls in package.iter("class"):
+                      for line in cls.iter("line"):
+                          key = (name, cls.get("filename"), line.get("number"))
+                          lines[key] = lines.get(key, False) or int(line.get("hits", "0")) > 0
+          per = {}
+          for (name, _, _), hit in lines.items():
+              total, covered = per.get(name, (0, 0))
+              per[name] = (total + 1, covered + (1 if hit else 0))
+          total = sum(t for t, _ in per.values())
+          covered = sum(c for _, c in per.values())
+          out = [f"### Cobertura de líneas: {100 * covered / total:.1f} %", ""]
+          out += [f"- {name}: {100 * c / t:.1f} % ({c}/{t})" for name, (t, c) in sorted(per.items())]
+          print("\n".join(out))
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("\n".join(out) + "\n")
 
   # En cada rama, empaqueta en Release sin publicar: comprueba que la versión no rompe la API
   # de la última publicada (validación de paquete) y que el analizador va dentro del paquete.
