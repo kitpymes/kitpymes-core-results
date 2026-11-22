@@ -60,6 +60,16 @@ public class ResultSettingsError
     public object? Details { get; set; }
 
     /// <summary>
+    /// Obtiene o establece el código estable del error.
+    /// </summary>
+    public string? Code { get; set; }
+
+    /// <summary>
+    /// Obtiene o establece los errores por campo con su código.
+    /// </summary>
+    public IReadOnlyList<FieldError>? FieldErrors { get; set; }
+
+    /// <summary>
     /// Agrega un mensaje al resultado.
     /// </summary>
     /// <param name="message">Mensaje de error.</param>

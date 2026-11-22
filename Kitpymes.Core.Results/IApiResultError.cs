@@ -38,4 +38,14 @@ public interface IApiResultError : IApiResultBase
     /// Obtiene un detalle.
     /// </summary>
     object? Details { get; }
+
+    /// <summary>
+    /// Obtiene el código estable del error (p. ej. <c>Users.EmailDuplicado</c>), para traducir el mensaje sin depender del texto.
+    /// </summary>
+    string? Code => null;
+
+    /// <summary>
+    /// Obtiene los errores por campo con su código.
+    /// </summary>
+    IReadOnlyList<FieldError>? FieldErrors => null;
 }

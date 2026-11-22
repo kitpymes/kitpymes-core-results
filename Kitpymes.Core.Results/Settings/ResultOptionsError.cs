@@ -9,6 +9,7 @@ namespace Kitpymes.Core.Results.Settings;
 
 using Kitpymes.Core.Shared.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 /*
@@ -132,6 +133,30 @@ public class ResultOptionsError
     public ResultOptionsError WithErrors(IDictionary<string, IEnumerable<string>>? errors)
     {
         ResultSettings.AddErrors(errors);
+
+        return this;
+    }
+
+    /// <summary>
+    /// Agrega el código estable del error.
+    /// </summary>
+    /// <param name="code">Código del error.</param>
+    /// <returns>ResultOptionsError.</returns>
+    public ResultOptionsError WithCode(string code)
+    {
+        ResultSettings.Code = code;
+
+        return this;
+    }
+
+    /// <summary>
+    /// Agrega los errores por campo con su código.
+    /// </summary>
+    /// <param name="fieldErrors">Errores por campo.</param>
+    /// <returns>ResultOptionsError.</returns>
+    public ResultOptionsError WithFieldErrors(IEnumerable<FieldError> fieldErrors)
+    {
+        ResultSettings.FieldErrors = fieldErrors?.ToList().AsReadOnly();
 
         return this;
     }
