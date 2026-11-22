@@ -51,11 +51,16 @@ jobs:
               raise SystemExit(0)
           lines = {}
           for f in files:
-              for package in ET.parse(f).getroot().iter("package"):
+              root = ET.parse(f).getroot()
+              # Cada informe da las rutas relativas a su propia carpeta <source>: se pasan a absolutas para poder unirlos.
+              sources = [x.text or "" for x in root.iter("source")]
+              base = sources[0] if sources else ""
+              for package in root.iter("package"):
                   name = package.get("name")
                   for cls in package.iter("class"):
+                      filename = os.path.normpath(os.path.join(base, cls.get("filename")))
                       for line in cls.iter("line"):
-                          key = (name, cls.get("filename"), line.get("number"))
+                          key = (name, filename, line.get("number"))
                           lines[key] = lines.get(key, False) or int(line.get("hits", "0")) > 0
           per = {}
           for (name, _, _), hit in lines.items():
