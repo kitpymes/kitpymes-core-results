@@ -20,6 +20,7 @@ namespace Kitpymes.Core.Results.Analyzers.Tests
     public Task<Result> FooAsync() => Task.FromResult(Result.Success());
     public ValueTask<Result<int>> ValueAsync() => new (Result.Success(1));
     public T Gen<T>() where T : Result => default!;
+    public T Any<T>() => default!;
     public int Number() => 1;
 ";
 
@@ -53,6 +54,8 @@ namespace Kitpymes.Core.Results.Analyzers.Tests
         [DataRow("bool M() => Foo().IsSuccess;", DisplayName = "comprobado")]
         [DataRow("void M() { Func<Result> f = () => Foo(); _ = f(); }", DisplayName = "lambda que lo devuelve")]
         [DataRow("void M() { Number(); }", DisplayName = "otro tipo")]
+        [DataRow("void M<T>() { Any<T>(); }", DisplayName = "parámetro de tipo sin restricción")]
+        [DataRow("void M<T>() where T : IDisposable { Any<T>(); }", DisplayName = "parámetro de tipo con otra restricción")]
         [DataRow("void M() { Task.Delay(1); }", DisplayName = "Task sin Result (no es cosa de KPY0003)")]
         public void Analyzer_Passing_UsedResult_Returns_NoDiagnostic(string body)
         {
