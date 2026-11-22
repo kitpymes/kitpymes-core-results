@@ -110,6 +110,23 @@ public sealed class Error
     /// <inheritdoc/>
     public override string ToString() => $"{Type} {Code}: {Message}";
 
+    /// <summary>
+    /// Indica si un código sigue la forma &lt;Modulo&gt;.&lt;Motivo&gt;.
+    /// </summary>
+    /// <param name="code">Código.</param>
+    /// <returns><c>true</c> si es válido.</returns>
+    internal static bool IsValidCode(string? code)
+    {
+        if (string.IsNullOrEmpty(code))
+        {
+            return false;
+        }
+
+        var parts = code.Split('.');
+
+        return parts.Length >= 2 && parts.All(IsPascalAscii);
+    }
+
     private static Error Create(string code, string message, ErrorType type, IEnumerable<FieldError>? fields)
     {
         if (!IsValidCode(code))
@@ -130,23 +147,6 @@ public sealed class Error
         }
 
         return new Error(code, message, type, list.AsReadOnly());
-    }
-
-    /// <summary>
-    /// Indica si un código sigue la forma &lt;Modulo&gt;.&lt;Motivo&gt;.
-    /// </summary>
-    /// <param name="code">Código.</param>
-    /// <returns><c>true</c> si es válido.</returns>
-    internal static bool IsValidCode(string? code)
-    {
-        if (string.IsNullOrEmpty(code))
-        {
-            return false;
-        }
-
-        var parts = code.Split('.');
-
-        return parts.Length >= 2 && parts.All(IsPascalAscii);
     }
 
     private static bool IsPascalAscii(string part)
