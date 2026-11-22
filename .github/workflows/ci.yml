@@ -65,6 +65,12 @@ jobs:
           covered = sum(c for _, c in per.values())
           out = [f"### Cobertura de líneas: {100 * covered / total:.1f} %", ""]
           out += [f"- {name}: {100 * c / t:.1f} % ({c}/{t})" for name, (t, c) in sorted(per.items())]
+          files_missing = {}
+          for (name, filename, number), hit in lines.items():
+              if not hit:
+                  files_missing.setdefault((name, os.path.basename(filename)), []).append(int(number))
+          out += ["", "Líneas sin cubrir:"]
+          out += [f"- {n} {f}: {sorted(set(v))}" for (n, f), v in sorted(files_missing.items())]
           print("\n".join(out))
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
               summary.write("\n".join(out) + "\n")
