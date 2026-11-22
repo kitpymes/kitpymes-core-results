@@ -73,7 +73,8 @@ public sealed class Result<T> : Result, IResultValue
     /// </summary>
     /// <param name="value">Valor.</param>
     /// <returns>El resultado.</returns>
-    public static Result<T> Success(T value) => new (value);
+    /// <exception cref="ArgumentNullException">Si el valor es nulo: un éxito siempre lleva valor (para "no hay nada", <see cref="Error.NotFound"/> o <see cref="Result"/>).</exception>
+    public static Result<T> Success(T value) => new (value ?? throw new ArgumentNullException(nameof(value)));
 
     /// <summary>
     /// Crea un resultado fallido.
