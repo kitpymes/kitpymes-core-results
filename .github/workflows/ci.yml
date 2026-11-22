@@ -102,6 +102,34 @@ jobs:
           unzip -l "$pkg" | grep -q 'analyzers/dotnet/cs/Kitpymes.Core.Results.Analyzers.dll' || { echo "::error::El paquete no lleva el analizador."; exit 1; }
           if ls artifacts/*.nupkg | grep -v -E '/Kitpymes\.Core\.Results\.[0-9]'; then echo "::error::Se ha empaquetado un proyecto que no es Results."; exit 1; fi
 
+  # En cada rama, tests de mutación con Stryker.NET (informativo: no para la pipeline).
+  # Un mutante que sobrevive es un test que falta. La puntuación sale en el resumen.
+  mutation:
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Instalar Stryker.NET
+        run: dotnet tool install -g dotnet-stryker
+
+      - name: Mutación de Results
+        working-directory: Kitpymes.Core.Results.Tests
+        run: dotnet stryker --project Kitpymes.Core.Results.csproj --reporter markdown --reporter progress --output ../mutacion/results || echo "::warning::Stryker no terminó en Results."
+
+      - name: Mutación del analizador
+        working-directory: Kitpymes.Core.Results.Analyzers.Tests
+        run: dotnet stryker --project Kitpymes.Core.Results.Analyzers.csproj --reporter markdown --reporter progress --output ../mutacion/analyzers || echo "::warning::Stryker no terminó en el analizador."
+
+      - name: Resumen
+        if: always()
+        run: |
+          for f in $(find mutacion -name '*.md'); do cat "$f" >> "$GITHUB_STEP_SUMMARY"; grep -iE 'mutation score|puntuaci' "$f" | head -n 3; done
+
   # En cada rama (lo que luego es un PR) comprueba que nuget.org confía en este repo
   # (política de Trusted Publishing). Sin ella, fusionar un cambio de versión fallaría al
   # publicar; así se ve antes de fusionar. No publica nada: pide una clave temporal y la descarta.
