@@ -5,14 +5,14 @@
   <Choose>
     <When Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
       <PropertyGroup>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
         <ApplicationIcon>$(SolutionDir)docs\images\logo.ico</ApplicationIcon>
         <PackageId>$(AssemblyName)</PackageId>
         <Authors>Kitpymes, Sebastian R Ferrari</Authors>
         <Owners>Kitpymes</Owners>
         <Title>Kitpymes.Core.Results</Title>
         <Copyright>Copyright © $([System.DateTime]::Now.Year) by Kitpymes and Contributors. All rights reserved.</Copyright>
-        <Description>Resultados estándar para operaciones y respuestas de API (ApiResult).</Description>
+        <Description>Resultados estándar: Result y Result&lt;T&gt; para dominio y aplicación, sin HTTP, con errores con código estable; traducción a ApiResult para la API; y analizador KPY0003 que no deja ignorar un Result.</Description>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageLicenseType>file</PackageLicenseType>
@@ -22,7 +22,10 @@
         <PackageReleaseNotes>https://github.com/kitpymes/kitpymes-core-results/blob/master/docs/RELEASE_NOTES.txt</PackageReleaseNotes>
         <RepositoryUrl>https://github.com/kitpymes/kitpymes-core-results</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>Results, Resultados, ApiResult, Api</PackageTags>
+        <!-- Comprueba al empaquetar que esta versión no rompe la API pública de la última publicada. -->
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <PackageValidationBaselineVersion>1.0.1</PackageValidationBaselineVersion>
+        <PackageTags>Results, Resultados, Result, Error, ApiResult, Api, Analyzer</PackageTags>
       </PropertyGroup>
 
       <ItemGroup>

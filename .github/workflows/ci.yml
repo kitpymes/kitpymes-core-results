@@ -48,6 +48,28 @@ jobs:
           echo "Cobertura de líneas: $pct %"
           echo "### Cobertura de líneas: $pct %" >> "$GITHUB_STEP_SUMMARY"
 
+  # En cada rama, empaqueta en Release sin publicar: comprueba que la versión no rompe la API
+  # de la última publicada (validación de paquete) y que el analizador va dentro del paquete.
+  pack-check:
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Empaquetar (sin publicar)
+        run: dotnet pack Solution.sln -c Release -o artifacts
+
+      - name: Comprobar el contenido del paquete
+        run: |
+          pkg=$(ls artifacts/Kitpymes.Core.Results.*.nupkg | grep -v snupkg | head -n 1)
+          unzip -l "$pkg"
+          unzip -l "$pkg" | grep -q 'analyzers/dotnet/cs/Kitpymes.Core.Results.Analyzers.dll' || { echo "::error::El paquete no lleva el analizador."; exit 1; }
+          if ls artifacts/*.nupkg | grep -v -E '/Kitpymes\.Core\.Results\.[0-9]'; then echo "::error::Se ha empaquetado un proyecto que no es Results."; exit 1; fi
+
   # En cada rama (lo que luego es un PR) comprueba que nuget.org confía en este repo
   # (política de Trusted Publishing). Sin ella, fusionar un cambio de versión fallaría al
   # publicar; así se ve antes de fusionar. No publica nada: pide una clave temporal y la descarta.
