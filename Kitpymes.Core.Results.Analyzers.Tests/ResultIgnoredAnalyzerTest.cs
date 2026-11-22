@@ -1,0 +1,141 @@
+using Kitpymes.Core.Results.Analyzers;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Immutable;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Kitpymes.Core.Results.Analyzers.Tests
+{
+    [TestClass]
+    public class ResultIgnoredAnalyzerTest
+    {
+        private const string Members = @"
+    public Result Foo() => Result.Success();
+    public Result<string> Bar() => Result.Success(""a"");
+    public Task<Result> FooAsync() => Task.FromResult(Result.Success());
+    public ValueTask<Result<int>> ValueAsync() => new (Result.Success(1));
+    public T Gen<T>() where T : Result => default!;
+    public int Number() => 1;
+";
+
+        [TestMethod]
+        [DataRow("void M() { Foo(); }", DisplayName = "Result tirado")]
+        [DataRow("void M() { Bar(); }", DisplayName = "Result<T> tirado")]
+        [DataRow("async Task M() { await FooAsync(); }", DisplayName = "await Task<Result>")]
+        [DataRow("async Task M() { await FooAsync().ConfigureAwait(false); }", DisplayName = "await con ConfigureAwait")]
+        [DataRow("async Task M() { await ValueAsync(); }", DisplayName = "await ValueTask<Result<T>>")]
+        [DataRow("void M() { FooAsync(); }", DisplayName = "Task<Result> sin await en método síncrono")]
+        [DataRow("void M() { ValueAsync(); }", DisplayName = "ValueTask<Result<T>> sin await")]
+        [DataRow("void M(S? s) { s?.Foo(); }", DisplayName = "acceso condicional")]
+        [DataRow("void M() { Gen<Result>(); }", DisplayName = "genérico cerrado")]
+        [DataRow("void M<T>() where T : Result { Gen<T>(); }", DisplayName = "parámetro de tipo restringido a Result")]
+        [DataRow("void M() { Action a = () => Foo(); a(); }", DisplayName = "lambda void")]
+        [DataRow("void M() => Foo();", DisplayName = "método void con =>")]
+        public void Analyzer_Passing_IgnoredResult_Returns_KPY0003(string body)
+        {
+            var actual = Analyze(body);
+
+            CollectionAssert.AreEqual(new[] { ResultIgnoredAnalyzer.DiagnosticId }, actual, string.Join(", ", actual));
+        }
+
+        [TestMethod]
+        [DataRow("void M() { _ = Foo(); }", DisplayName = "descarte explícito")]
+        [DataRow("async Task M() { _ = await FooAsync(); }", DisplayName = "descarte explícito tras await")]
+        [DataRow("void M() { var r = Foo(); _ = r; }", DisplayName = "guardado en variable")]
+        [DataRow("Result f = Result.Success(); void M() { f = Foo(); }", DisplayName = "asignado a campo")]
+        [DataRow("Result M() => Foo();", DisplayName = "devuelto")]
+        [DataRow("async Task<Result> M() => await FooAsync();", DisplayName = "devuelto tras await")]
+        [DataRow("bool M() => Foo().IsSuccess;", DisplayName = "comprobado")]
+        [DataRow("void M() { Func<Result> f = () => Foo(); _ = f(); }", DisplayName = "lambda que lo devuelve")]
+        [DataRow("void M() { Number(); }", DisplayName = "otro tipo")]
+        [DataRow("void M() { Task.Delay(1); }", DisplayName = "Task sin Result (no es cosa de KPY0003)")]
+        public void Analyzer_Passing_UsedResult_Returns_NoDiagnostic(string body)
+        {
+            var actual = Analyze(body);
+
+            Assert.AreEqual(0, actual.Length, string.Join(", ", actual));
+        }
+
+        [TestMethod]
+        public void Analyzer_Passing_CompilationWithoutResults_Returns_NoDiagnostic()
+        {
+            var actual = Analyze("class S { int Foo() => 1; void M() { Foo(); } }", withResults: false, raw: true);
+
+            Assert.AreEqual(0, actual.Length, string.Join(", ", actual));
+        }
+
+        [TestMethod]
+        public void Analyzer_Passing_IgnoredResult_Returns_ErrorSeverityAndLocationOfTheCall()
+        {
+            var diagnostic = AnalyzeFull("void M() { Foo(); }").Single();
+
+            Assert.AreEqual(DiagnosticSeverity.Error, diagnostic.Severity);
+            Assert.AreEqual("Foo()", diagnostic.Location.SourceTree!.GetText().ToString(diagnostic.Location.SourceSpan));
+            StringAssert.Contains(diagnostic.GetMessage(System.Globalization.CultureInfo.InvariantCulture), "_ =");
+        }
+
+        [TestMethod]
+        public void SupportedDiagnostics_Passing_Analyzer_Returns_OnlyKPY0003()
+        {
+            var actual = new ResultIgnoredAnalyzer().SupportedDiagnostics;
+
+            Assert.AreEqual(1, actual.Length);
+            Assert.AreEqual("KPY0003", actual[0].Id);
+            Assert.IsTrue(actual[0].IsEnabledByDefault);
+        }
+
+        private static string[] Analyze(string body, bool withResults = true, bool raw = false)
+            => AnalyzeFull(body, withResults, raw).Select(x => x.Id).ToArray();
+
+        private static ImmutableArray<Diagnostic> AnalyzeFull(string body, bool withResults = true, bool raw = false)
+        {
+            var source = raw
+                ? body
+                : "using System; using System.Threading.Tasks; using Kitpymes.Core.Results;\n#nullable enable\npublic class S {" + Members + body + "\n}";
+
+            var runtime = Path.GetDirectoryName(typeof(object).Assembly.Location)!;
+            var references = Directory.GetFiles(runtime, "*.dll")
+                .Where(IsManaged)
+                .Select(x => (MetadataReference)MetadataReference.CreateFromFile(x))
+                .ToList();
+
+            if (withResults)
+            {
+                references.Add(MetadataReference.CreateFromFile(typeof(Result).Assembly.Location));
+            }
+
+            var compilation = CSharpCompilation.Create(
+                "Prueba",
+                new[] { CSharpSyntaxTree.ParseText(source) },
+                references,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Enable));
+
+            var compileErrors = compilation.GetDiagnostics().Where(x => x.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, compileErrors.Length, "El código de prueba no compila: " + string.Join("; ", compileErrors.Select(x => x.ToString())));
+
+            return compilation
+                .WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(new ResultIgnoredAnalyzer()))
+                .GetAnalyzerDiagnosticsAsync()
+                .GetAwaiter()
+                .GetResult();
+        }
+
+        private static bool IsManaged(string path)
+        {
+            try
+            {
+                System.Reflection.AssemblyName.GetAssemblyName(path);
+                return true;
+            }
+            catch (BadImageFormatException)
+            {
+                return false;
+            }
+        }
+    }
+}
