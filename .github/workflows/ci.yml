@@ -123,7 +123,7 @@ jobs:
       # Desde la carpeta de cada proyecto de tests, con SolutionDir en el entorno (ver arriba).
       - name: Mutación de Results
         working-directory: Kitpymes.Core.Results.Tests
-        run: dotnet stryker --project Kitpymes.Core.Results.csproj --reporter markdown --reporter progress --output ../mutacion/results || echo "::warning::Stryker no terminó en Results."
+        run: dotnet stryker --project Kitpymes.Core.Results.csproj --reporter markdown --reporter progress --diag --output ../mutacion/results || echo "::warning::Stryker no terminó en Results."
 
       - name: Mutación del analizador
         working-directory: Kitpymes.Core.Results.Analyzers.Tests
@@ -132,7 +132,7 @@ jobs:
       - name: Resumen
         if: always()
         run: |
-          for f in $(find mutacion -name '*.md'); do cat "$f" >> "$GITHUB_STEP_SUMMARY"; grep -iE 'mutation score|puntuaci' "$f" | head -n 3; done
+          find mutacion -name "*.log" -exec grep -h -iE "error|MSB[0-9]+|NETSDK" {} + | sort -u | head -40 || true; for f in $(find mutacion -name "*.md"); do cat "$f" >> "$GITHUB_STEP_SUMMARY"; grep -iE 'mutation score|puntuaci' "$f" | head -n 3; done
 
   # En cada rama (lo que luego es un PR) comprueba que nuget.org confía en este repo
   # (política de Trusted Publishing). Sin ella, fusionar un cambio de versión fallaría al
