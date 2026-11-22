@@ -107,6 +107,9 @@ jobs:
   mutation:
     if: github.ref != 'refs/heads/master'
     runs-on: ubuntu-latest
+    # Stryker analiza cada proyecto por separado: sin esto no ve $(SolutionDir) y no encuentra Common.Build.props.
+    env:
+      SolutionDir: ${{ github.workspace }}/
     steps:
       - uses: actions/checkout@v7
 
