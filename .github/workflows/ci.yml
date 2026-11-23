@@ -122,15 +122,29 @@ jobs:
 
       - name: Mutación de Results
         working-directory: Kitpymes.Core.Results.Tests
-        run: dotnet stryker --project Kitpymes.Core.Results.csproj --reporter markdown --reporter progress --diag --log-to-file --output ../mutacion/results
+        run: dotnet stryker --project Kitpymes.Core.Results.csproj --reporter markdown --reporter json --reporter progress --diag --log-to-file --output ../mutacion/results
 
       - name: Mutación del analizador
         working-directory: Kitpymes.Core.Results.Analyzers.Tests
-        run: dotnet stryker --project Kitpymes.Core.Results.Analyzers.csproj --reporter markdown --reporter progress --output ../mutacion/analyzers
+        run: dotnet stryker --project Kitpymes.Core.Results.Analyzers.csproj --reporter markdown --reporter json --reporter progress --output ../mutacion/analyzers
 
       - name: Resumen
         if: always()
         run: find mutacion -name '*.md' -exec cat {} + | tee -a "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Mutantes vivos
+        if: always()
+        shell: python
+        run: |
+          import glob, json, os
+          for f in glob.glob("mutacion/**/mutation-report.json", recursive=True):
+              data = json.load(open(f, encoding="utf-8"))
+              for name, file in data["files"].items():
+                  lines = file["source"].split("\n")
+                  for m in file["mutants"]:
+                      if m["status"] in ("Survived", "NoCoverage"):
+                          line = m["location"]["start"]["line"]
+                          print(f"{m['status']}: {os.path.basename(name)}:{line} {m['mutatorName']} -> {m.get('replacement', '')!r} | {lines[line - 1].strip()}")
 
       - name: Registros de Stryker
         if: failure()
