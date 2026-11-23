@@ -278,6 +278,27 @@ namespace Kitpymes.Core.Results.Tests
             Assert.AreEqual("El campo value es requerido", exception.Message);
         }
 
+        [TestMethod]
+        [DataRow("es-ES")]
+        [DataRow("en-US")]
+        [DataRow("fr-FR")]
+        public void WithErrors_Passing_CampoOMensajeVacio_Returns_MismoMensajeQueShared(string cultura)
+        {
+            ConCultura(cultura, () =>
+            {
+                IDictionary<string, IEnumerable<string>> original = new Dictionary<string, IEnumerable<string>>();
+
+                var sharedKey = Assert.ThrowsExactly<Kitpymes.Core.Shared.Util.SharedException>(() => original.ToAddOrUpdate(string.Empty, "m"));
+                var sharedValue = Assert.ThrowsExactly<Kitpymes.Core.Shared.Util.SharedException>(() => original.ToAddOrUpdate("Campo", string.Empty));
+
+                var key = Assert.ThrowsExactly<ArgumentException>(() => new ResultOptionsError().WithErrors(new[] { (string.Empty, "m") }));
+                var value = Assert.ThrowsExactly<ArgumentException>(() => new ResultOptionsError().WithErrors(new[] { ("Campo", string.Empty) }));
+
+                Assert.AreEqual(sharedKey.Message, key.Message);
+                Assert.AreEqual(sharedValue.Message, value.Message);
+            });
+        }
+
         #endregion ToAddOrUpdate
 
         #region Guid.ToSecuencial
