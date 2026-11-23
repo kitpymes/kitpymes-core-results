@@ -1,3 +1,7 @@
+# v.1.2.1
+- CAMBIO DE COMPORTAMIENTO (la API pública no cambia): ResultOptionsError.WithErrors(tuplas), y con él ApiResult.BadRequest(tuplas), suma los mensajes de un campo repetido en vez de quedarse sólo con el último. Antes, [("Email", "m1"), ("Email", "m2")] daba Email: ["m2"]; ahora da Email: ["m1", "m2"], en orden y sin repetidos. Es lo mismo que ya hacía WithErrors(diccionario) desde la 1.1.1. Venía de ToAddOrUpdate de Kitpymes.Core.Shared 2.0.1. Quien dependiera de quedarse con un solo mensaje por campo verá ahora todos.
+- El empaquetado valida la API contra la 1.2.0.
+
 # v.1.2.0
 - Results ya no depende de Kitpymes.Core.Shared ni del framework de ASP.NET Core (Microsoft.AspNetCore.App). Sólo necesita .NET 10. Motivo: el dominio usa Results (también a través de Kitpymes.Core.Mediator.Abstractions) y no puede depender de ASP.NET Core.
 - Lo que se usaba de Shared es ahora interno, con los mismos textos y el mismo comportamiento que la 1.1.1: títulos "El proceso se ejecuto correctamente" y "Se produjeron uno o más errores de validación" (en inglés con la cultura en; cualquier otra cultura, en español), TraceId secuencial, mensajes en blanco ignorados y mensajes unidos con ", ".
