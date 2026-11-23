@@ -115,6 +115,32 @@ namespace Kitpymes.Core.Results.Tests
         }
 
         [TestMethod]
+        public void ApiResultError_Passing_NoMessagesNorErrors_Throws()
+        {
+            Assert.Throws<Exception>(() => ApiResult.Error(options => options.WithStatusCode(HttpStatusCode.BadRequest)));
+        }
+
+        [TestMethod]
+        public void ApiResultBadRequest_Passing_TwoMessages_Returns_MessagesJoinedWithComma()
+        {
+            var actual = ApiResult.BadRequest(new[] { "Uno", "Dos" });
+
+            Assert.AreEqual("Uno, Dos", actual.Message);
+        }
+
+        [TestMethod]
+        public void ApiResultError_Passing_WithErrorsTwice_Returns_ErrorsOfBothCalls()
+        {
+            var actual = ApiResult.Error(options => options
+                .WithErrors(new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = new[] { "Obligatorio." } })
+                .WithErrors(new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = new[] { "Formato no válido." }, ["Nombre"] = new[] { "Obligatorio." } }));
+
+            Assert.AreEqual(2, actual.Errors!.Count);
+            CollectionAssert.AreEqual(new[] { "Obligatorio.", "Formato no válido." }, actual.Errors["Email"].ToArray());
+            CollectionAssert.AreEqual(new[] { "Obligatorio." }, actual.Errors["Nombre"].ToArray());
+        }
+
+        [TestMethod]
         public void ToApiResult_Passing_Null_Throws_ArgumentNullException()
         {
             Assert.ThrowsExactly<ArgumentNullException>(() => ((Result)null!).ToApiResult());
