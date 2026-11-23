@@ -12,7 +12,8 @@ namespace Kitpymes.Core.Results.Tests
 {
     /// <summary>
     /// Desde la 1.2.0, Results no depende de Kitpymes.Core.Shared: lo que usaba de Shared es interno.
-    /// Estos tests comprueban, a través de la API pública, que cada cosa copiada se comporta como en la 1.1.1.
+    /// Estos tests comprueban, a través de la API pública, que cada cosa copiada se comporta como en la 1.1.1,
+    /// salvo ToAddOrUpdate, que desde la 1.2.1 suma los mensajes de un campo repetido en vez de sustituirlos.
     /// El proyecto de tests sí referencia Shared 2.0.1, la versión que usaba la 1.1.1, para comparar con el original.
     /// </summary>
     [TestClass]
