@@ -9,6 +9,7 @@ namespace Kitpymes.Core.Results.Settings;
 
 using Kitpymes.Core.Shared.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 
 /*
   Clase de configuración de las propiedades a devolver de ResultSettingsError
@@ -111,7 +112,12 @@ public class ResultSettingsError
         {
             Errors ??= new Dictionary<string, IEnumerable<string>>();
 
-            Errors = errors;
+            foreach (var error in errors!)
+            {
+                Errors[error.Key] = Errors.TryGetValue(error.Key, out var existing)
+                    ? existing.Concat(error.Value).ToList()
+                    : error.Value.ToList();
+            }
         }
     }
 }
