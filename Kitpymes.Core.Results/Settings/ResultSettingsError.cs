@@ -110,13 +110,16 @@ public class ResultSettingsError
     {
         if (!errors.ToIsNullOrAny())
         {
-            Errors ??= new Dictionary<string, IEnumerable<string>>();
+            // Se respeta el comparador de claves de quien llama (p. ej. sin distinguir mayúsculas).
+            Errors ??= new Dictionary<string, IEnumerable<string>>((errors as Dictionary<string, IEnumerable<string>>)?.Comparer);
 
             foreach (var error in errors!)
             {
-                Errors[error.Key] = Errors.TryGetValue(error.Key, out var existing)
-                    ? existing.Concat(error.Value).ToList()
-                    : error.Value.ToList();
+                var messages = error.Value ?? Enumerable.Empty<string>();
+
+                Errors[error.Key] = (Errors.TryGetValue(error.Key, out var existing) ? existing.Concat(messages) : messages)
+                    .Distinct()
+                    .ToList();
             }
         }
     }

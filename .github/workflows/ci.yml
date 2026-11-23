@@ -118,7 +118,7 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Instalar Stryker.NET
-        run: dotnet tool install -g dotnet-stryker
+        run: dotnet tool install -g dotnet-stryker --version 5.1.0
 
       - name: Mutación de Results
         working-directory: Kitpymes.Core.Results.Tests
@@ -186,7 +186,7 @@ jobs:
       - name: Ver si esta versión ya está publicada
         id: version
         run: |
-          version=$(dotnet msbuild Kitpymes.Core.Results/Kitpymes.Core.Results.csproj -getProperty:Version -p:Configuration=Release -p:SolutionDir=$PWD/)
+          version=$(dotnet msbuild Kitpymes.Core.Results/Kitpymes.Core.Results.csproj -getProperty:Version -p:Configuration=Release)
           echo "version=$version" >> "$GITHUB_OUTPUT"
           if git ls-remote --exit-code --tags origin "refs/tags/v$version" > /dev/null; then
             echo "La versión $version ya tiene etiqueta: no hay nada que publicar."

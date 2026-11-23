@@ -1,8 +1,11 @@
 # v.1.1.1
-- Corregido: ResultOptionsError.WithErrors (ResultSettingsError.AddErrors) sustituía los errores de llamadas anteriores en lugar de sumarlos. Ahora los junta, y si un campo se repite une sus mensajes en orden. Venía de la 1.0.1.
+- Corregido: ResultOptionsError.WithErrors (ResultSettingsError.AddErrors) sustituía los errores de llamadas anteriores en lugar de sumarlos. Venía de la 1.0.1. Ahora:
+  - junta los errores de cada llamada y, si un campo se repite, une sus mensajes en orden y sin repetidos (como ya hacían los mensajes);
+  - guarda una copia: los cambios posteriores en el diccionario de quien llama ya no se reflejan; se respeta su comparador de claves si es un Dictionary;
+  - un campo con la lista de mensajes a null cuenta como vacío.
 - Interno: Result.FailureFor crea el fallo igual para Result y Result<T> (sin cambio de comportamiento).
-- Tests de mutación con Stryker.NET (84,13 % en la primera medición, sobre la 1.1.0) y casos nuevos en los límites de los códigos de error.
-- Sin cambios en la API pública (el empaquetado la valida contra la 1.1.0).
+- Tests de mutación con Stryker.NET en cada rama: Results pasa del 84,13 % (medido sobre la 1.1.0) al 94,12 %, y el analizador del 71,88 % al 81,25 %. Casos nuevos en los límites de los códigos de error.
+- Sin cambios en la API pública. El empaquetado tiene activada la validación de paquete contra la 1.1.0.
 
 # v.1.1.0
 - Nuevo: Result y Result<T> para dominio y aplicación, sin nada de HTTP. Los errores de negocio se devuelven en el resultado.
