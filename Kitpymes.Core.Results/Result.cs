@@ -106,22 +106,11 @@ public class Result
 
         private static Func<Error, TResult> Build()
         {
-            var type = typeof(TResult);
+            // La jerarquía está cerrada: TResult es Result o Result<T>, y los dos tienen
+            // 'public static <su tipo> Failure(Error)'.
+            var method = typeof(TResult).GetMethod(nameof(Failure), BindingFlags.Public | BindingFlags.Static, new[] { typeof(Error) });
 
-            if (type == typeof(Result))
-            {
-                return error => (TResult)(object)new Result(error);
-            }
-
-            // La jerarquía está cerrada: cualquier otro TResult es Result<T>.
-            var method = type.GetMethod(nameof(Result<object>.Failure), BindingFlags.Public | BindingFlags.Static, new[] { typeof(Error) });
-
-            if (method is null || method.ReturnType != type)
-            {
-                throw new InvalidOperationException($"{type.FullName} no es Result ni Result<T>.");
-            }
-
-            return (Func<Error, TResult>)Delegate.CreateDelegate(typeof(Func<Error, TResult>), method);
+            return (Func<Error, TResult>)Delegate.CreateDelegate(typeof(Func<Error, TResult>), method!);
         }
     }
 }
