@@ -74,6 +74,13 @@ namespace Kitpymes.Core.Results.Tests
         [DataRow("Validations.Requerido")]
         [DataRow("Users.Roles.NoAsignado")]
         [DataRow("Module2.Motivo3")]
+        [DataRow("A.B")]
+        [DataRow("Z.Z")]
+        [DataRow("Users.AZ")]
+        [DataRow("Users.Az")]
+        [DataRow("Users.Aa")]
+        [DataRow("Users.A0")]
+        [DataRow("Users.A9")]
         public void NotFound_Passing_ValidCode_Returns_Error(string code)
         {
             Assert.AreEqual(code, Error.NotFound(code, "Mensaje.").Code);
@@ -92,6 +99,14 @@ namespace Kitpymes.Core.Results.Tests
         [DataRow("Users.ÉmailDuplicado")]
         [DataRow("Users..Motivo")]
         [DataRow("2Users.Motivo")]
+        [DataRow("@Users.Motivo")]
+        [DataRow("[Users.Motivo")]
+        [DataRow("Users.Mot@ivo")]
+        [DataRow("Users.Mot[ivo")]
+        [DataRow("Users.Mot`ivo")]
+        [DataRow("Users.Mot{ivo")]
+        [DataRow("Users.Mot/ivo")]
+        [DataRow("Users.Mot:ivo")]
         public void NotFound_Passing_InvalidCode_Throws_ArgumentException(string? code)
         {
             Assert.ThrowsExactly<ArgumentException>(() => Error.NotFound(code!, "Mensaje."));
