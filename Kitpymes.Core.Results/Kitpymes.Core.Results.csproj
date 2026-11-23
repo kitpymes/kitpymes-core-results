@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="$(SolutionDir)docs/props/Common.Build.props" Condition="Exists('$(SolutionDir)docs/props/Common.Build.props')" />
-  <Import Project="$(SolutionDir)docs/props/Pack.Build.props" Condition="Exists('$(SolutionDir)docs/props/Pack.Build.props')" />
+  <Import Project="$(KitpymesRoot)docs/props/Common.Build.props" Condition="Exists('$(KitpymesRoot)docs/props/Common.Build.props')" />
+  <Import Project="$(KitpymesRoot)docs/props/Pack.Build.props" Condition="Exists('$(KitpymesRoot)docs/props/Pack.Build.props')" />
 
   <ItemGroup>
     <PackageReference Include="Kitpymes.Core.Shared" Version="2.0.1" />
@@ -9,8 +9,8 @@
 
   <!-- El analizador KPY0003 va dentro del paquete (analyzers/dotnet/cs): quien instala Results lo recibe. -->
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)Kitpymes.Core.Results.Analyzers\Kitpymes.Core.Results.Analyzers.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
-    <None Include="$(SolutionDir)Kitpymes.Core.Results.Analyzers\bin\$(Configuration)\netstandard2.0\Kitpymes.Core.Results.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <ProjectReference Include="$(KitpymesRoot)Kitpymes.Core.Results.Analyzers\Kitpymes.Core.Results.Analyzers.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <None Include="$(KitpymesRoot)Kitpymes.Core.Results.Analyzers\bin\$(Configuration)\netstandard2.0\Kitpymes.Core.Results.Analyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
 
 </Project>

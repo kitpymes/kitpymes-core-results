@@ -6,7 +6,7 @@
     <When Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
       <PropertyGroup>
         <Version>1.1.0</Version>
-        <ApplicationIcon>$(SolutionDir)docs\images\logo.ico</ApplicationIcon>
+        <ApplicationIcon>$(KitpymesRoot)docs\images\logo.ico</ApplicationIcon>
         <PackageId>$(AssemblyName)</PackageId>
         <Authors>Kitpymes, Sebastian R Ferrari</Authors>
         <Owners>Kitpymes</Owners>
@@ -29,9 +29,9 @@
       </PropertyGroup>
 
       <ItemGroup>
-        <None Include="$(SolutionDir)docs\LICENSE.txt" Pack="true" PackagePath="." />
-        <None Include="$(SolutionDir)docs\images\logo.png" Pack="true" PackagePath="." />
-        <None Include="$(SolutionDir)docs\README_NUGET.md" Pack="true" PackagePath="README.md" />
+        <None Include="$(KitpymesRoot)docs\LICENSE.txt" Pack="true" PackagePath="." />
+        <None Include="$(KitpymesRoot)docs\images\logo.png" Pack="true" PackagePath="." />
+        <None Include="$(KitpymesRoot)docs\README_NUGET.md" Pack="true" PackagePath="README.md" />
       </ItemGroup>
 
     </When>
