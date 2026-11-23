@@ -108,7 +108,7 @@ public class ResultOptionsError
     /// </summary>
     /// <param name="errors">Lista de errores.</param>
     /// <returns>ErrorOptions.</returns>
-    /// <exception cref="ArgumentException">Si un campo o un mensaje es nulo, vacío o sólo espacios (hasta la 1.1.1, <c>SharedException</c>).</exception>
+    /// <exception cref="System.ArgumentException">Si un campo o un mensaje es nulo, vacío o sólo espacios (hasta la 1.1.1, <c>SharedException</c>).</exception>
     public ResultOptionsError WithErrors(IEnumerable<(string fieldName, string message)> errors)
     {
         if (!errors.ToIsNullOrAny())
