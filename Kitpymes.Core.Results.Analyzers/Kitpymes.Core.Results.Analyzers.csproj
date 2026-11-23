@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="$(SolutionDir)docs/props/Common.Build.props" Condition="Exists('$(SolutionDir)docs/props/Common.Build.props')" />
+  <Import Project="$(KitpymesRoot)docs/props/Common.Build.props" Condition="Exists('$(KitpymesRoot)docs/props/Common.Build.props')" />
 
   <!-- Los analizadores los carga el compilador: tienen que ser netstandard2.0. -->
   <PropertyGroup>
