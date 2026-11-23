@@ -108,13 +108,13 @@
       <PropertyGroup>
         <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
         <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
-        <CodeAnalysisRuleSet>$(SolutionDir)docs\analyzers\stylecop.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(KitpymesRoot)docs\analyzers\stylecop.ruleset</CodeAnalysisRuleSet>
       </PropertyGroup>
 
       <ItemGroup>
         <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.4.27" PrivateAssets="All" />
         <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" IncludeAssets="Analyzers;Build" PrivateAssets="All" />
-        <AdditionalFiles Include="$(SolutionDir)docs\analyzers\stylecop.json" Visible="false" />
+        <AdditionalFiles Include="$(KitpymesRoot)docs\analyzers\stylecop.json" Visible="false" />
       </ItemGroup>
     </When>
     <!--
@@ -135,12 +135,12 @@
   <PropertyGroup Condition=" '$(IsTestsProject)' == 'false' ">
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)docs\signassembly\SignStrong.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(KitpymesRoot)docs\signassembly\SignStrong.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <!-- MSTest -->
   <PropertyGroup>
-    <RunSettingsFilePath>$(SolutionDir)docs\props\tests.runsettings</RunSettingsFilePath>
+    <RunSettingsFilePath>$(KitpymesRoot)docs\props\tests.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
 </Project>
