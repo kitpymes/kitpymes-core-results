@@ -141,6 +141,49 @@ namespace Kitpymes.Core.Results.Tests
         }
 
         [TestMethod]
+        public void ApiResultError_Passing_WithErrorsRepeatedMessage_Returns_MessageOnce()
+        {
+            var actual = ApiResult.Error(options => options
+                .WithErrors(new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = new[] { "Obligatorio." } })
+                .WithErrors(new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = new[] { "Obligatorio." } }));
+
+            CollectionAssert.AreEqual(new[] { "Obligatorio." }, actual.Errors!["Email"].ToArray());
+        }
+
+        [TestMethod]
+        public void ApiResultError_Passing_WithErrorsIgnoreCaseDictionary_Returns_KeysMergedIgnoringCase()
+        {
+            var first = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>>(StringComparer.OrdinalIgnoreCase) { ["Email"] = new[] { "Obligatorio." } };
+            var second = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["email"] = new[] { "Formato no válido." } };
+
+            var actual = ApiResult.Error(options => options.WithErrors(first).WithErrors(second));
+
+            Assert.AreEqual(1, actual.Errors!.Count);
+            CollectionAssert.AreEqual(new[] { "Obligatorio.", "Formato no válido." }, actual.Errors["EMAIL"].ToArray());
+        }
+
+        [TestMethod]
+        public void ApiResultError_Passing_WithErrorsNullMessages_Returns_EmptyMessages()
+        {
+            var actual = ApiResult.Error(options => options
+                .WithMessage("Datos inválidos.")
+                .WithErrors(new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = null! }));
+
+            Assert.AreEqual(0, actual.Errors!["Email"].Count());
+        }
+
+        [TestMethod]
+        public void ApiResultError_Passing_WithErrorsAndChangingSourceAfter_Returns_ErrorsUnchanged()
+        {
+            var source = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> { ["Email"] = new[] { "Obligatorio." } };
+
+            var actual = ApiResult.Error(options => options.WithErrors(source));
+            source["Nombre"] = new[] { "Obligatorio." };
+
+            Assert.AreEqual(1, actual.Errors!.Count);
+        }
+
+        [TestMethod]
         public void ToApiResult_Passing_Null_Throws_ArgumentNullException()
         {
             Assert.ThrowsExactly<ArgumentNullException>(() => ((Result)null!).ToApiResult());
