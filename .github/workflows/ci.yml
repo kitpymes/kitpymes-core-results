@@ -104,6 +104,13 @@ jobs:
           unzip -p "$pkg" '*.nuspec' > paquete.nuspec
           cat paquete.nuspec
           if grep -q 'Kitpymes.Core.Results.Analyzers' paquete.nuspec; then echo "::error::El paquete declara una dependencia del analizador."; exit 1; fi
+          # Desde la 1.2.0, sin Shared ni ASP.NET Core: un FrameworkReference pasa a quien instala el paquete,
+          # y el dominio (vía Mediator.Abstractions) no puede depender de ASP.NET Core.
+          if grep -qi 'frameworkReference' paquete.nuspec; then echo "::error::El paquete lleva frameworkReferences (ASP.NET Core)."; exit 1; fi
+          if grep -q 'Kitpymes.Core.Shared' paquete.nuspec; then echo "::error::El paquete depende de Kitpymes.Core.Shared."; exit 1; fi
+          if grep -q 'Microsoft.AspNetCore' paquete.nuspec; then echo "::error::El paquete depende de un paquete de ASP.NET Core."; exit 1; fi
+          # Los títulos en inglés van en el ensamblado satélite: sin él, se verían siempre en español.
+          unzip -l "$pkg" | grep -q 'lib/net10.0/en/Kitpymes.Core.Results.resources.dll' || { echo "::error::El paquete no lleva los textos en inglés (en/Kitpymes.Core.Results.resources.dll)."; exit 1; }
 
   # En cada rama, tests de mutación con Stryker.NET: mide si los tests detectan fallos metidos
   # a propósito. Un mutante que sobrevive es un test que falta. La puntuación sale en el resumen.

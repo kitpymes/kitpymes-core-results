@@ -10,11 +10,9 @@ namespace Kitpymes.Core.Results;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using Kitpymes.Core.Shared;
-using Kitpymes.Core.Results.Settings;
-using Kitpymes.Core.Shared.Extensions;
 using System.Linq;
-using Kitpymes.Core.Shared.Util;
+using Kitpymes.Core.Results.Internal;
+using Kitpymes.Core.Results.Settings;
 
 /*
     Clase de resultados ApiResult
@@ -83,7 +81,7 @@ public class ApiResult : IApiResult
     /// </summary>
     /// <returns>ApiResult.</returns>
     public static ApiResult Ok()
-        => Ok(x => x.WithTitle(SharedResource.MsgProcessRanSuccessfully));
+        => Ok(x => x.WithTitle(ResultsResource.MsgProcessRanSuccessfully));
 
     /// <summary>
     /// Agrega uno o varios resultados al resultado.
@@ -92,12 +90,16 @@ public class ApiResult : IApiResult
     /// <returns>ApiResult.</returns>
     public static ApiResult Ok(Action<ResultOptionsOk> options)
     {
-        var config = options.ToConfigureOrDefault().ResultSettings;
+        var settings = new ResultOptionsOk();
+
+        options?.Invoke(settings);
+
+        var config = settings.ResultSettings;
 
         return new ApiResult(true)
         {
             Status = (int)HttpStatusCode.OK,
-            Title = config.Title ?? SharedResource.MsgProcessRanSuccessfully,
+            Title = config.Title ?? ResultsResource.MsgProcessRanSuccessfully,
             Data = config.Data,
         };
     }
@@ -116,7 +118,7 @@ public class ApiResult : IApiResult
         => Error(x => x
             .WithMessage(message)
             .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithTitle(SharedResource.MsgValidationsError));
+            .WithTitle(ResultsResource.MsgValidationsError));
 
     /// <summary>
     /// Devuelve un resultado de error de validación.
@@ -130,7 +132,7 @@ public class ApiResult : IApiResult
             .WithMessage(message)
             .WithDetails(details)
             .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithTitle(SharedResource.MsgValidationsError));
+            .WithTitle(ResultsResource.MsgValidationsError));
 
     /// <summary>
     /// Devuelve un resultado de error de validación.
@@ -142,7 +144,7 @@ public class ApiResult : IApiResult
         => Error(x => x
             .WithMessages(messages)
             .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithTitle(SharedResource.MsgValidationsError));
+            .WithTitle(ResultsResource.MsgValidationsError));
 
     /// <summary>
     /// Devuelve un resultado de error de validación.
@@ -154,7 +156,7 @@ public class ApiResult : IApiResult
         => Error(x => x
             .WithErrors(errors)
             .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithTitle(SharedResource.MsgValidationsError));
+            .WithTitle(ResultsResource.MsgValidationsError));
 
     /// <summary>
     /// Devuelve un resultado de error de validación.
@@ -166,7 +168,7 @@ public class ApiResult : IApiResult
         => Error(x => x
             .WithErrors(errors)
             .WithStatusCode(HttpStatusCode.BadRequest)
-            .WithTitle(SharedResource.MsgValidationsError));
+            .WithTitle(ResultsResource.MsgValidationsError));
 
     #endregion BadRequest
 
@@ -175,11 +177,19 @@ public class ApiResult : IApiResult
     /// </summary>
     /// <param name="options">Configuración de la lista de errores.</param>
     /// <returns>ApiResult.</returns>
+    /// <exception cref="ArgumentException">Si no hay ningún mensaje ni ningún error (hasta la 1.1.1, <c>SharedException</c>).</exception>
     public static ApiResult Error(Action<ResultOptionsError> options)
     {
-        var config = options.ToConfigureOrDefault().ResultSettings;
+        var settings = new ResultOptionsError();
 
-        Verify.ToThrowIf($"{nameof(config.Messages)} and {nameof(config.Errors)} are null or not contains elements.", () => config.Messages.ToIsNullOrAny() && config.Errors.ToIsNullOrAny());
+        options?.Invoke(settings);
+
+        var config = settings.ResultSettings;
+
+        if (config.Messages.ToIsNullOrAny() && config.Errors.ToIsNullOrAny())
+        {
+            throw new ArgumentException($"{nameof(config.Messages)} and {nameof(config.Errors)} are null or not contains elements.");
+        }
 
         return new ApiResult(false)
         {
@@ -188,7 +198,7 @@ public class ApiResult : IApiResult
             TraceId = Guid.NewGuid().ToSecuencial().ToString(),
             Details = config.Details,
             Exception = config.Exception,
-            Message = config.Messages?.Any() == true ? config.Messages.ToString(", ") : null,
+            Message = config.Messages?.Any() == true ? string.Join(", ", config.Messages) : null,
             Errors = config.Errors,
             Code = config.Code,
             FieldErrors = config.FieldErrors,

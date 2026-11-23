@@ -7,9 +7,9 @@
 
 namespace Kitpymes.Core.Results.Settings;
 
-using Kitpymes.Core.Shared.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using Kitpymes.Core.Results.Internal;
 
 /*
   Clase de configuración de las propiedades a devolver de ResultSettingsError
@@ -76,7 +76,7 @@ public class ResultSettingsError
     /// <param name="message">Mensaje de error.</param>
     public void AddMessage(string message)
     {
-        if (!message.ToIsNullOrEmpty())
+        if (!string.IsNullOrWhiteSpace(message))
         {
             Messages ??= new List<string>();
 
