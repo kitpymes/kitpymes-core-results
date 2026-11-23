@@ -132,6 +132,10 @@ jobs:
         if: always()
         run: find mutacion -name '*.md' -exec cat {} + >> "$GITHUB_STEP_SUMMARY" || true
 
+      - name: Registros de Stryker (errores)
+        if: failure()
+        run: find mutacion Kitpymes.Core.Results.Tests/StrykerOutput -type f \( -name '*.txt' -o -name '*.log' \) -exec grep -h -iE 'error|MSB[0-9]+|NETSDK|exception|Failed' {} + 2>/dev/null | sort -u | head -n 80 || true
+
       - name: Guardar los registros de Stryker
         if: always()
         uses: actions/upload-artifact@v5
