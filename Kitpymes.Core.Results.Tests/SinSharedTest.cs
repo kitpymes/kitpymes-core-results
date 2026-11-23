@@ -210,7 +210,7 @@ namespace Kitpymes.Core.Results.Tests
         #region ToAddOrUpdate
 
         [TestMethod]
-        public void WithErrors_Passing_Tuplas_Returns_MismoResultadoQueToAddOrUpdateDeShared()
+        public void WithErrors_Passing_Tuplas_Returns_CamposEnOrdenConSusMensajesSinRepetir()
         {
             var tuplas = new[]
             {
@@ -219,33 +219,43 @@ namespace Kitpymes.Core.Results.Tests
                 ("Email", "m1"),
                 ("Email", "m2"),
                 ("Nombre", "n1"),
+                ("Email", "m3"),
             };
-
-            IDictionary<string, IEnumerable<string>> esperado = new Dictionary<string, IEnumerable<string>>();
-
-            foreach (var (campo, mensaje) in tuplas)
-            {
-                esperado.ToAddOrUpdate(campo, mensaje);
-            }
 
             var actual = new ResultOptionsError().WithErrors(tuplas).ResultSettings.Errors!;
 
-            CollectionAssert.AreEqual(esperado.Keys.ToList(), actual.Keys.ToList());
-
-            foreach (var campo in esperado.Keys)
-            {
-                CollectionAssert.AreEqual(esperado[campo].ToList(), actual[campo].ToList(), campo);
-            }
+            CollectionAssert.AreEqual(new[] { "Email", "Nombre" }, actual.Keys.ToList());
+            CollectionAssert.AreEqual(new[] { "m1", "m2", "m3" }, actual["Email"].ToList());
+            CollectionAssert.AreEqual(new[] { "n1" }, actual["Nombre"].ToList());
         }
 
         [TestMethod]
-        public void WithErrors_Passing_CampoRepetidoConOtroMensaje_Returns_SoloElUltimoMensaje()
+        public void WithErrors_Passing_CampoRepetidoConOtroMensaje_Returns_LosDosMensajes()
         {
-            // Comportamiento heredado de ToAddOrUpdate de Shared 2.0.1 (igual que en la 1.1.1): con la misma
-            // clave y otro mensaje, la lista se sustituye en lugar de sumarse.
+            // Hasta la 1.2.0 (heredado de ToAddOrUpdate de Shared 2.0.1) se quedaba sólo con "m2".
             var actual = new ResultOptionsError().WithErrors(new[] { ("Email", "m1"), ("Email", "m2") }).ResultSettings.Errors!;
 
-            CollectionAssert.AreEqual(new[] { "m2" }, actual["Email"].ToList());
+            CollectionAssert.AreEqual(new[] { "m1", "m2" }, actual["Email"].ToList());
+        }
+
+        [TestMethod]
+        public void WithErrors_Passing_TuplasYDiccionario_Returns_MensajesSumados()
+        {
+            var actual = new ResultOptionsError()
+                .WithErrors(new[] { ("Email", "m1"), ("Email", "m2") })
+                .WithErrors(new Dictionary<string, IEnumerable<string>> { ["Email"] = new[] { "m2", "m3" } })
+                .WithErrors(new[] { ("Email", "m4") })
+                .ResultSettings.Errors!;
+
+            CollectionAssert.AreEqual(new[] { "m1", "m2", "m3", "m4" }, actual["Email"].ToList());
+        }
+
+        [TestMethod]
+        public void BadRequest_Passing_TuplasConCampoRepetido_Returns_TodosLosMensajes()
+        {
+            var actual = ApiResult.BadRequest(new[] { ("Email", "m1"), ("Email", "m2") });
+
+            CollectionAssert.AreEqual(new[] { "m1", "m2" }, actual.Errors!["Email"].ToList());
         }
 
         [TestMethod]

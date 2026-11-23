@@ -16,7 +16,8 @@ using System.Threading;
 /*
     Lo que Results usaba de Kitpymes.Core.Shared, copiado como interno para no depender de Shared
     (y, con él, del framework de ASP.NET Core). Mismo comportamiento que Shared 2.0.1, salvo la
-    excepción: donde Shared lanzaba SharedException, aquí se lanza ArgumentException con el mismo mensaje.
+    excepción (donde Shared lanzaba SharedException, aquí se lanza ArgumentException con el mismo mensaje)
+    y ToAddOrUpdate, que desde la 1.2.1 suma el valor a la lista en vez de sustituirla.
 */
 
 /// <summary>
@@ -34,7 +35,8 @@ internal static class InternalExtensions
 
     /// <summary>
     /// Agrega un valor a la lista de una clave (antes <c>ToAddOrUpdate</c> de Shared).
-    /// Si la clave ya existe y el valor no está en su lista, la lista pasa a tener sólo ese valor.
+    /// Si la clave ya existe, el valor se añade al final de su lista, salvo que ya esté.
+    /// Hasta la 1.2.0, como en Shared, la lista se sustituía por el valor nuevo.
     /// </summary>
     /// <param name="dictionary">Diccionario.</param>
     /// <param name="key">Clave.</param>
@@ -56,7 +58,7 @@ internal static class InternalExtensions
         {
             if (!list.Contains(value))
             {
-                dictionary[key] = new List<string> { value };
+                dictionary[key] = list.Append(value).ToList();
             }
         }
         else
