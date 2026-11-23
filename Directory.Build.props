@@ -1,0 +1,9 @@
+<Project>
+  <!--
+    Los proyectos importan docs/props con $(SolutionDir), que sólo existe al compilar desde la solución.
+    Al compilar o analizar un proyecto suelto (dotnet build de un .csproj, Stryker.NET), se toma la raíz del repo.
+  -->
+  <PropertyGroup Condition=" '$(SolutionDir)' == '' or '$(SolutionDir)' == '*Undefined*' ">
+    <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+  </PropertyGroup>
+</Project>
