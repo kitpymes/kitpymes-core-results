@@ -130,7 +130,7 @@ jobs:
 
       - name: Resumen
         if: always()
-        run: find mutacion -name '*.md' -exec cat {} + >> "$GITHUB_STEP_SUMMARY" || true
+        run: find mutacion -name '*.md' -exec cat {} + | tee -a "$GITHUB_STEP_SUMMARY" || true
 
       - name: Registros de Stryker
         if: failure()
