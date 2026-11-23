@@ -7,10 +7,10 @@
 
 namespace Kitpymes.Core.Results.Settings;
 
-using Kitpymes.Core.Shared.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Kitpymes.Core.Results.Internal;
 
 /*
   Clase de configuración del resultado a devolver ResultOptionsError
@@ -108,6 +108,7 @@ public class ResultOptionsError
     /// </summary>
     /// <param name="errors">Lista de errores.</param>
     /// <returns>ErrorOptions.</returns>
+    /// <exception cref="ArgumentException">Si un campo o un mensaje es nulo, vacío o sólo espacios (hasta la 1.1.1, <c>SharedException</c>).</exception>
     public ResultOptionsError WithErrors(IEnumerable<(string fieldName, string message)> errors)
     {
         if (!errors.ToIsNullOrAny())

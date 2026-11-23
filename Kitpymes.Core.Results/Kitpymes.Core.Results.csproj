@@ -3,8 +3,11 @@
   <Import Project="$(KitpymesRoot)docs/props/Common.Build.props" Condition="Exists('$(KitpymesRoot)docs/props/Common.Build.props')" />
   <Import Project="$(KitpymesRoot)docs/props/Pack.Build.props" Condition="Exists('$(KitpymesRoot)docs/props/Pack.Build.props')" />
 
+  <!-- Desde la 1.2.0, sin Kitpymes.Core.Shared ni el framework de ASP.NET Core (que añade Common.Build.props):
+       el dominio usa Results a través de Mediator.Abstractions y no puede depender de ASP.NET Core.
+       Un FrameworkReference pasa a quien consume el paquete; pack-check comprueba que el nuspec no lo lleva. -->
   <ItemGroup>
-    <PackageReference Include="Kitpymes.Core.Shared" Version="2.0.1" />
+    <FrameworkReference Remove="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <!-- El analizador KPY0003 va dentro del paquete (analyzers/dotnet/cs): quien instala Results lo recibe. -->
