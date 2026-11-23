@@ -5,7 +5,7 @@
   <Choose>
     <When Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
       <PropertyGroup>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <ApplicationIcon>$(KitpymesRoot)docs\images\logo.ico</ApplicationIcon>
         <PackageId>$(AssemblyName)</PackageId>
         <Authors>Kitpymes, Sebastian R Ferrari</Authors>
@@ -24,7 +24,7 @@
         <RepositoryType>git</RepositoryType>
         <!-- Comprueba al empaquetar que esta versión no rompe la API pública de la última publicada. -->
         <EnablePackageValidation>true</EnablePackageValidation>
-        <PackageValidationBaselineVersion>1.0.1</PackageValidationBaselineVersion>
+        <PackageValidationBaselineVersion>1.1.0</PackageValidationBaselineVersion>
         <PackageTags>Results, Resultados, Result, Error, ApiResult, Api, Analyzer</PackageTags>
       </PropertyGroup>
 
